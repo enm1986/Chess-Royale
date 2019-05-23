@@ -5,43 +5,34 @@
  */
 package Piezas;
 
+import Juego.Jugador;
+
 /**
  * Clase Caballo
- * 
+ *
  * @author infor04
  */
 public class Caballo extends Pieza {
 
-    /**
-     * Constructor de pieza Caballo
-     * 
-     * @param color 
-     */
-    public Caballo(char color) {
-        super(color, 'C');
+    private Tipo tipo;
+
+    public Caballo(int x, int y, Jugador jugador) {
+        super(x, y, jugador);
+        this.tipo = Tipo.CABALLO;
     }
 
-    /**
-     * Valida los movimientos válidos del Caballo
-     * 
-     * @param f_origen fila origen
-     * @param c_origen columna origen
-     * @param f_destino fila destino
-     * @param c_destino columna destino
-     * @return Devuelve un booleano indicando si el movimiento es válido
-     */
     @Override
-    public boolean movimientoValido(int f_origen, int c_origen, int f_destino, int c_destino) {
+    public boolean movimientoValido(int f_destino, int c_destino) {
 
-        boolean valido = false;
-        int f_diferencia = Math.abs(f_destino - f_origen);
-        int c_diferencia = Math.abs(c_destino - c_origen);
+        int f_diferencia = Math.abs(f_destino - this.x);
+        int c_diferencia = Math.abs(c_destino - this.y);
 
-        if ((f_diferencia*f_diferencia)+(c_diferencia*c_diferencia) == 5) { // movimientos válidos del Caballo (teorema de pitágoras)
-            valido = true;
-        }
+        return ((f_diferencia * f_diferencia) + (c_diferencia * c_diferencia) == 5);
+    }
 
-        return valido;
+    @Override
+    public Tipo getTipo() {
+        return this.tipo;
     }
 
 }

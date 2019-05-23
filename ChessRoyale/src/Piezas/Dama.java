@@ -5,43 +5,34 @@
  */
 package Piezas;
 
+import Juego.Jugador;
+
 /**
  * Clase Dama
- * 
+ *
  * @author infor04
  */
 public class Dama extends Pieza {
 
-    /**
-     * Constructor de pieza Dama
-     * 
-     * @param color 
-     */
-    public Dama(char color) {
-        super(color, 'D');
+    private Tipo tipo;
+
+    public Dama(int x, int y, Jugador jugador) {
+        super(x, y, jugador);
+        this.tipo = Tipo.DAMA;
     }
 
-    /**
-     * Valida los movimientos válidos de la Dama
-     * 
-     * @param f_origen fila origen
-     * @param c_origen columna origen
-     * @param f_destino fila destino
-     * @param c_destino columna destino
-     * @return Devuelve un booleano indicando si el movimiento es válido
-     */
     @Override
-    public boolean movimientoValido(int f_origen, int c_origen, int f_destino, int c_destino) {
+    public boolean movimientoValido(int f_destino, int c_destino) {
 
-        boolean valido = false;
-        int f_diferencia = Math.abs(f_destino - f_origen);
-        int c_diferencia = Math.abs(c_destino - c_origen);
+        int f_diferencia = Math.abs(f_destino - this.x);
+        int c_diferencia = Math.abs(c_destino - this.y);
 
-        if ((c_origen == c_destino) || (f_origen == f_destino) || (f_diferencia == c_diferencia)) { // movimientos válidos de la Dama
-            valido = true;
-        }
+        return ((this.y == c_destino) || (this.x == f_destino) || (f_diferencia == c_diferencia));
+    }
 
-        return valido;
+    @Override
+    public Tipo getTipo() {
+        return this.tipo;
     }
 
 }
