@@ -5,38 +5,24 @@
  */
 package Piezas;
 
+import Juego.Jugador;
+
 /**
  *
  * @author infor04
  */
 public abstract class Pieza {
-    
-    public static final char BLANCA = 'B';
-    public static final char NEGRA = 'N';
-    
-    private char color;
-    private char tipo;
 
-    public Pieza(char color, char tipo) {
-        this.color = color;
+    protected int x, y;
+    protected Jugador jugador;
+
+    public Pieza(int x, int y, Jugador jugador) {
+        this.x = x;
+        this.y = y;
+        this.jugador = jugador;
     }
 
-    public char getColor() {
-        return color;
-    }
+    abstract public boolean movimientoValido(int f_destino, int c_destino);
 
-    public void setColor(char color) {
-        this.color = color;
-    }
-
-    public char getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(char tipo) {
-        this.tipo = tipo;
-    }
-    
-    abstract public boolean movimientoValido(int f_origen, int c_origen, int f_destino, int c_destino);
-    
+    abstract public Tipo getTipo();
 }

@@ -5,40 +5,31 @@
  */
 package Piezas;
 
+import Juego.Jugador;
+
 /**
  * Clase Torre
- * 
+ *
  * @author infor04
  */
 public class Torre extends Pieza {
 
-    /**
-     * Constructor de la pieza Torre
-     * @param color 
-     */
-    public Torre(char color) {
-        super(color, 'T');
+    private Tipo tipo;
+
+    public Torre(int x, int y, Jugador jugador) {
+        super(x, y, jugador);
+        this.tipo = Tipo.TORRE;
     }
 
-    /**
-     * Valida los movimientos válidos de la Torre
-     *
-     * @param f_origen fila origen
-     * @param c_origen columna origen
-     * @param f_destino fila destino
-     * @param c_destino columna destino
-     * @return Devuelve un booleano indicando si el movimiento es válido
-     */
     @Override
-    public boolean movimientoValido(int f_origen, int c_origen, int f_destino, int c_destino) {
+    public boolean movimientoValido(int f_destino, int c_destino) {
 
-        boolean valido = false;
+        return ((this.x == f_destino) || (this.y == c_destino));
+    }
 
-        if ((f_origen == f_destino) || (c_origen == c_destino)) { // movimientos válidos de la Torre
-            valido = true;
-        }
-
-        return valido;
+    @Override
+    public Tipo getTipo() {
+        return this.tipo;
     }
 
 }

@@ -5,42 +5,33 @@
  */
 package Piezas;
 
+import Juego.Jugador;
+
 /**
- * Clase Alfil
- * 
+ * Clase Rey
+ *
  * @author infor04
  */
 public class Rey extends Pieza {
 
-    /**
-     * Constructor de pieza Rey
-     * 
-     * @param color 
-     */
-    public Rey(char color) {
-        super(color, 'R');
+    private Tipo tipo;
+
+    public Rey(int x, int y, Jugador jugador) {
+        super(x, y, jugador);
+        this.tipo = Tipo.REY;
     }
 
-    /**
-     * Valida los movimientos válidos del Rey
-     * 
-     * @param f_origen fila origen
-     * @param c_origen columna origen
-     * @param f_destino fila destino
-     * @param c_destino columna destino
-     * @return Devuelve un booleano indicando si el movimiento es válido
-     */
     @Override
-    public boolean movimientoValido(int f_origen, int c_origen, int f_destino, int c_destino) {
+    public boolean movimientoValido(int f_destino, int c_destino) {
 
-        boolean valido = false;
-        int f_diferencia = Math.abs(f_destino - f_origen);
-        int c_diferencia = Math.abs(c_destino - c_origen);
+        int f_diferencia = Math.abs(f_destino - this.x);
+        int c_diferencia = Math.abs(c_destino - this.y);
 
-        if ((f_diferencia<=1) && (c_diferencia<=1)) { // movimientos válidos del Rey
-            valido = true;
-        }
+        return ((f_diferencia <= 1) && (c_diferencia <= 1));
+    }
 
-        return valido;
+    @Override
+    public Tipo getTipo() {
+        return this.tipo;
     }
 }

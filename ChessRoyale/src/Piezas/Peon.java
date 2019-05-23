@@ -5,62 +5,40 @@
  */
 package Piezas;
 
+import Juego.Jugador;
+
 /**
  * Clase Peón
- * 
+ *
  * @author infor04
  */
 public class Peon extends Pieza {
 
-    /**
-     * Indica si el peón se ha movido por primera vez o no
-     */
+    private Tipo tipo;
     private boolean movido_1;
 
-    /**
-     * Constructor de la pieza Peón
-     *
-     * @param color
-     */
-    public Peon(char color) {
-        super(color, 'P');
-        movido_1 = false; // inicializado a NO movido por primera vez
+    public Peon(boolean movido_1, int x, int y, Jugador jugador) {
+        super(x, y, jugador);
+        this.movido_1 = false;
+        this.tipo = Tipo.PEON;
     }
 
-    /**
-     * Consulta si el Peón se ha movido por primera vez
-     *
-     * @return Devuelve un booleano indicando si el Peón ya se ha movido por
-     * primera vez
-     */
     public boolean isMovido_1() {
         return movido_1;
     }
 
-    /**
-     * Usado para actualizar el Peón cuando se haya movido por primera vez
-     */
-    public void setMovido_1() {
-        this.movido_1 = true; // sólo puede moverse por primera vez una vez
+    public void setMovido_1(boolean movido_1) {
+        this.movido_1 = movido_1;
     }
 
-    /**
-     * Valida los movimientos válidos del Peón
-     *
-     * @param f_origen fila origen
-     * @param c_origen columna origen
-     * @param f_destino fila destino
-     * @param c_destino columna destino
-     * @return Devuelve un booleano indicando si el movimiento es válido
-     */
     @Override
-    public boolean movimientoValido(int f_origen, int c_origen, int f_destino, int c_destino) {
+    public boolean movimientoValido(int f_destino, int c_destino) {
+
+        int f_diferencia = Math.abs(f_destino - this.x);
+        int diagonal = Math.abs(c_destino - this.y);
 
         boolean valido = false;
-        int f_diferencia = Math.abs(f_destino - f_origen);
-        int diagonal = Math.abs(c_destino - c_origen);
-
-        if (f_destino > f_origen) { // si nº fila destino es mayor que nº fila origen
+        if (f_destino > this.x) { // si nº fila destino es mayor que nº fila origen
 
             if ((f_diferencia == 1) && ((diagonal == 0) || (diagonal == 1))) { // movimientos válidos del peón
                 valido = true;
@@ -69,9 +47,13 @@ public class Peon extends Pieza {
                     valido = true;
                 }
             }
-
         }
         return valido;
+    }
+
+    @Override
+    public Tipo getTipo() {
+        return this.tipo;
     }
 
 }
