@@ -19,8 +19,6 @@ public class Casilla {
     private Pieza pieza;
 
     //Contructores
-    public Casilla() {
-    }
 
     public Casilla(int fila, int columna) {
         this.fila = fila;

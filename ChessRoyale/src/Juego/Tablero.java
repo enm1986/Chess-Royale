@@ -9,7 +9,7 @@ package Juego;
  *
  * @author infor04
  */
-public class Tablero {
+public final class Tablero {
 
     private Casilla[][] tablero;
 
