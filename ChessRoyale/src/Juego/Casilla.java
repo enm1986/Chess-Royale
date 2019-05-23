@@ -12,59 +12,37 @@ import Piezas.Pieza;
  * @author infor04
  */
 public class Casilla {
-    
-    //Atributos
-    private String fila;
-    private String columna;
-    private String casilla;
-    private boolean disponible;
-    private Pieza pieza;
-    
-    //Contructores
 
+    //Atributos
+    private int fila;
+    private int columna;
+    private Pieza pieza;
+
+    //Contructores
     public Casilla() {
     }
 
-    public Casilla(String fila, String columna) {
+    public Casilla(int fila, int columna) {
         this.fila = fila;
         this.columna = columna;
-        this.casilla = fila+columna;
-        this.disponible = true;
         this.pieza = null;
     }
-    
-    //G&S
 
-    public String getFila() {
+    //G&S
+    public int getFila() {
         return fila;
     }
 
-    public void setFila(String fila) {
+    public void setFila(int fila) {
         this.fila = fila;
     }
 
-    public String getColumna() {
+    public int getColumna() {
         return columna;
     }
 
-    public void setColumna(String columna) {
+    public void setColumna(int columna) {
         this.columna = columna;
-    }
-
-    public String getCasilla() {
-        return casilla;
-    }
-
-    public void setCasilla(String casilla) {
-        this.casilla = casilla;
-    }
-
-    public boolean isDisponible() {
-        return disponible;
-    }
-
-    public void setDisponible(boolean disponible) {
-        this.disponible = disponible;
     }
 
     public Pieza getPieza() {
@@ -74,7 +52,16 @@ public class Casilla {
     public void setPieza(Pieza pieza) {
         this.pieza = pieza;
     }
-    
-    
-    
+
+    //Métodos
+    public boolean isOcupada() {
+        return this.pieza != null;
+    }
+
+    public Pieza vaciarCasilla() {
+        Pieza pieza = this.pieza;
+        this.pieza = null;
+        return pieza;
+    }
+
 }
