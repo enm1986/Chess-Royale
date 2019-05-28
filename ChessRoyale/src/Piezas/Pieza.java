@@ -13,16 +13,18 @@ import Juego.Jugador;
  */
 public abstract class Pieza {
 
-    protected int x, y;
     protected Jugador jugador;
 
-    public Pieza(int x, int y, Jugador jugador) {
-        this.x = x;
-        this.y = y;
+    public Pieza(Jugador jugador) {
         this.jugador = jugador;
     }
 
-    abstract public boolean movimientoValido(int f_destino, int c_destino);
+    public Jugador getJugador() {
+        return jugador;
+    }
+
+    abstract public boolean movimientoValido(int f_origen, int c_origen, int f_destino, int c_destino);
 
     abstract public Tipo getTipo();
+
 }

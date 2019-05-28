@@ -16,15 +16,15 @@ public class Torre extends Pieza {
 
     private Tipo tipo;
 
-    public Torre(int x, int y, Jugador jugador) {
-        super(x, y, jugador);
+    public Torre(Jugador jugador) {
+        super(jugador);
         this.tipo = Tipo.TORRE;
     }
 
     @Override
-    public boolean movimientoValido(int f_destino, int c_destino) {
+    public boolean movimientoValido(int f_origen, int c_origen, int f_destino, int c_destino) {
 
-        return ((this.x == f_destino) || (this.y == c_destino));
+        return ((f_origen == f_destino) || (c_origen == c_destino));
     }
 
     @Override

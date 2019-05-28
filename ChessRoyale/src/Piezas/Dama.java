@@ -16,18 +16,18 @@ public class Dama extends Pieza {
 
     private Tipo tipo;
 
-    public Dama(int x, int y, Jugador jugador) {
-        super(x, y, jugador);
+    public Dama(Jugador jugador) {
+        super(jugador);
         this.tipo = Tipo.DAMA;
     }
 
     @Override
-    public boolean movimientoValido(int f_destino, int c_destino) {
+    public boolean movimientoValido(int f_origen, int c_origen, int f_destino, int c_destino) {
 
-        int f_diferencia = Math.abs(f_destino - this.x);
-        int c_diferencia = Math.abs(c_destino - this.y);
+        int f_diferencia = Math.abs(f_destino - f_origen);
+        int c_diferencia = Math.abs(c_destino - c_origen);
 
-        return ((this.y == c_destino) || (this.x == f_destino) || (f_diferencia == c_diferencia));
+        return ((c_origen == c_destino) || (f_origen == f_destino) || (f_diferencia == c_diferencia));
     }
 
     @Override

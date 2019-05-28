@@ -16,16 +16,16 @@ public class Caballo extends Pieza {
 
     private Tipo tipo;
 
-    public Caballo(int x, int y, Jugador jugador) {
-        super(x, y, jugador);
+    public Caballo(Jugador jugador) {
+        super(jugador);
         this.tipo = Tipo.CABALLO;
     }
 
     @Override
-    public boolean movimientoValido(int f_destino, int c_destino) {
+    public boolean movimientoValido(int f_origen, int c_origen, int f_destino, int c_destino) {
 
-        int f_diferencia = Math.abs(f_destino - this.x);
-        int c_diferencia = Math.abs(c_destino - this.y);
+        int f_diferencia = Math.abs(f_destino - f_origen);
+        int c_diferencia = Math.abs(c_destino - c_origen);
 
         return ((f_diferencia * f_diferencia) + (c_diferencia * c_diferencia) == 5);
     }

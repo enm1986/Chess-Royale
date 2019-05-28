@@ -61,5 +61,7 @@ public class Casilla {
         this.pieza = null;
         return pieza;
     }
+    
+
 
 }

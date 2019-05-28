@@ -17,8 +17,8 @@ public class Peon extends Pieza {
     private Tipo tipo;
     private boolean movido_1;
 
-    public Peon(boolean movido_1, int x, int y, Jugador jugador) {
-        super(x, y, jugador);
+    public Peon(Jugador jugador) {
+        super(jugador);
         this.movido_1 = false;
         this.tipo = Tipo.PEON;
     }
@@ -32,13 +32,13 @@ public class Peon extends Pieza {
     }
 
     @Override
-    public boolean movimientoValido(int f_destino, int c_destino) {
+    public boolean movimientoValido(int f_origen, int c_origen, int f_destino, int c_destino) {
 
-        int f_diferencia = Math.abs(f_destino - this.x);
-        int diagonal = Math.abs(c_destino - this.y);
+        int f_diferencia = Math.abs(f_destino - f_origen);
+        int diagonal = Math.abs(c_destino - c_origen);
 
         boolean valido = false;
-        if (f_destino > this.x) { // si nº fila destino es mayor que nº fila origen
+        if (f_destino > f_origen) { // si nº fila destino es mayor que nº fila origen
 
             if ((f_diferencia == 1) && ((diagonal == 0) || (diagonal == 1))) { // movimientos válidos del peón
                 valido = true;
