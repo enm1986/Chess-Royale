@@ -5,6 +5,7 @@
  */
 package Piezas;
 
+import Juego.Color;
 import Juego.Jugador;
 
 /**
@@ -38,13 +39,16 @@ public class Peon extends Pieza {
         int diagonal = Math.abs(c_destino - c_origen);
 
         boolean valido = false;
-        if (f_destino > f_origen) { // si nº fila destino es mayor que nº fila origen
 
-            if ((f_diferencia == 1) && ((diagonal == 0) || (diagonal == 1))) { // movimientos válidos del peón
-                valido = true;
-            } else if (!isMovido_1()) {
-                if ((f_diferencia == 2) && (diagonal == 0)) { //movimiento válido del peón en primer movimiento
+        if (f_destino != f_origen) {
+            if ((f_destino > f_origen && this.getJugador().getColor() == Color.NEGRAS)
+                    || (f_destino < f_origen && this.getJugador().getColor() == Color.BLANCAS)) {
+                if ((f_diferencia == 1) && ((diagonal == 0) || (diagonal == 1))) { // movimientos válidos del peón
                     valido = true;
+                } else if (!isMovido_1()) {
+                    if ((f_diferencia == 2) && (diagonal == 0)) { //movimiento válido del peón en primer movimiento
+                        valido = true;
+                    }
                 }
             }
         }

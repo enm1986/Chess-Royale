@@ -18,7 +18,7 @@ public class chess {
         t.inicializarTablero(blanco, negro);
         t.mostrarTablero();
         
-        if(t.getCasilla(6,0).getPieza().movimientoValido(6,0, 7,0)){
+        if(t.getCasilla(1,0).getPieza().movimientoValido(1,0, 0,0)){
             System.out.println("Movimiento válido");
         }else{
             System.out.println("Movimiento NO válido");
