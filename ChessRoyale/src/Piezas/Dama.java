@@ -5,7 +5,7 @@
  */
 package Piezas;
 
-import Juego.Jugador;
+import Juego.Color;
 
 /**
  * Clase Dama
@@ -14,10 +14,10 @@ import Juego.Jugador;
  */
 public class Dama extends Pieza {
 
-    private Tipo tipo;
+    private final Tipo tipo;
 
-    public Dama(Jugador jugador) {
-        super(jugador);
+    public Dama(Color color) {
+        super(color);
         this.tipo = Tipo.DAMA;
     }
 

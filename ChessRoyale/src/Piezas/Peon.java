@@ -6,7 +6,6 @@
 package Piezas;
 
 import Juego.Color;
-import Juego.Jugador;
 
 /**
  * Clase Peón
@@ -15,11 +14,11 @@ import Juego.Jugador;
  */
 public class Peon extends Pieza {
 
-    private Tipo tipo;
+    private final Tipo tipo;
     private boolean movido_1;
 
-    public Peon(Jugador jugador) {
-        super(jugador);
+    public Peon(Color color) {
+        super(color);
         this.movido_1 = false;
         this.tipo = Tipo.PEON;
     }
@@ -41,8 +40,8 @@ public class Peon extends Pieza {
         boolean valido = false;
 
         if (f_destino != f_origen) {
-            if ((f_destino > f_origen && this.getJugador().getColor() == Color.NEGRAS)
-                    || (f_destino < f_origen && this.getJugador().getColor() == Color.BLANCAS)) {
+            if ((f_destino > f_origen && this.color == Color.NEGRAS)
+                    || (f_destino < f_origen && this.color == Color.BLANCAS)) {
                 if ((f_diferencia == 1) && ((diagonal == 0) || (diagonal == 1))) { // movimientos válidos del peón
                     valido = true;
                 } else if (!isMovido_1()) {

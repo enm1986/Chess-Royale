@@ -5,7 +5,8 @@
  */
 package Piezas;
 
-import Juego.Jugador;
+import Juego.Color;
+
 
 /**
  * Clase Torre
@@ -14,10 +15,10 @@ import Juego.Jugador;
  */
 public class Torre extends Pieza {
 
-    private Tipo tipo;
+    private final Tipo tipo;
 
-    public Torre(Jugador jugador) {
-        super(jugador);
+    public Torre(Color color) {
+        super(color);
         this.tipo = Tipo.TORRE;
     }
 

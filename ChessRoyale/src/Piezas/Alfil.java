@@ -5,7 +5,7 @@
  */
 package Piezas;
 
-import Juego.Jugador;
+import Juego.Color;
 
 /**
  * Clase Alfil
@@ -14,10 +14,10 @@ import Juego.Jugador;
  */
 public class Alfil extends Pieza {
 
-    private Tipo tipo;
+    private final Tipo tipo;
 
-    public Alfil(Jugador jugador) {
-        super(jugador);
+    public Alfil(Color color) {
+        super(color);
         this.tipo = Tipo.ALFIL;
     }
 

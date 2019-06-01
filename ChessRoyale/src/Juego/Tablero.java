@@ -33,8 +33,7 @@ public final class Tablero {
         return this.tablero[fila][columna];
     }
 
-    public void inicializarTablero(Jugador blanco, Jugador negro) {
-        System.out.println("inicializarTablero");
+    public void inicializarTablero() {
         for (int f = 0; f < tablero.length; f++) {
             for (int c = 0; c < tablero.length; c++) {
                 switch (f) {
@@ -42,51 +41,51 @@ public final class Tablero {
                         switch (c) { // piezas blancas
                             case 0:
                             case 7:
-                                this.getCasilla(f, c).setPieza(new Torre(negro));
+                                this.getCasilla(f, c).setPieza(new Torre(Color.NEGRAS));
                                 break;
                             case 1:
                             case 6:
-                                this.getCasilla(f, c).setPieza(new Caballo(negro));
+                                this.getCasilla(f, c).setPieza(new Caballo(Color.NEGRAS));
                                 break;
                             case 2:
                             case 5:
-                                this.getCasilla(f, c).setPieza(new Alfil(negro));
+                                this.getCasilla(f, c).setPieza(new Alfil(Color.NEGRAS));
                                 break;
                             case 3:
-                                this.getCasilla(f, c).setPieza(new Rey(negro));
+                                this.getCasilla(f, c).setPieza(new Rey(Color.NEGRAS));
                                 break;
                             case 4:
-                                this.getCasilla(f, c).setPieza(new Dama(negro));
+                                this.getCasilla(f, c).setPieza(new Dama(Color.NEGRAS));
                                 break;
                         }
                         break;
                     case 1: // segunda fila - peones blancos
-                        this.getCasilla(f, c).setPieza(new Peon(negro));
+                        this.getCasilla(f, c).setPieza(new Peon(Color.NEGRAS));
                         break;
 
                     case 6: // Penúltima fila - peones negros
-                        this.getCasilla(f, c).setPieza(new Peon(blanco));
+                        this.getCasilla(f, c).setPieza(new Peon(Color.BLANCAS));
                         break;
 
                     case 7: // última fila
                         switch (c) { // piezas negras
                             case 0:
                             case 7:
-                                this.getCasilla(f, c).setPieza(new Torre(blanco));
+                                this.getCasilla(f, c).setPieza(new Torre(Color.BLANCAS));
                                 break;
                             case 1:
                             case 6:
-                                this.getCasilla(f, c).setPieza(new Caballo(blanco));
+                                this.getCasilla(f, c).setPieza(new Caballo(Color.BLANCAS));
                                 break;
                             case 2:
                             case 5:
-                                this.getCasilla(f, c).setPieza(new Alfil(blanco));
+                                this.getCasilla(f, c).setPieza(new Alfil(Color.BLANCAS));
                                 break;
                             case 3:
-                                this.getCasilla(f, c).setPieza(new Dama(blanco));
+                                this.getCasilla(f, c).setPieza(new Dama(Color.BLANCAS));
                                 break;
                             case 4:
-                                this.getCasilla(f, c).setPieza(new Rey(blanco));
+                                this.getCasilla(f, c).setPieza(new Rey(Color.BLANCAS));
                                 break;
                         }
                         break;
@@ -96,13 +95,12 @@ public final class Tablero {
 
     }
 
-    public void mostrarTablero(){
-        System.out.println("mostrarTablero");
+    public void mostrarTablero() {
         for (int f = 0; f < tablero.length; f++) {
             for (int c = 0; c < tablero.length; c++) {
-                if(this.getCasilla(f, c).getPieza()!=null){
-                    System.out.print(" | "+ this.getCasilla(f, c).getPieza().getTipo().toString());
-                }else{
+                if (this.getCasilla(f, c).getPieza() != null) {
+                    System.out.print(" | " + this.getCasilla(f, c).getPieza().getTipo().toString());
+                } else {
                     System.out.print("  *  ");
                 }
             }

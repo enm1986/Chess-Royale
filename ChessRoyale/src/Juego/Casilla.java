@@ -14,12 +14,11 @@ import Piezas.Pieza;
 public class Casilla {
 
     //Atributos
-    private int fila;
-    private int columna;
+    private final int fila;
+    private final int columna;
     private Pieza pieza;
 
-    //Contructores
-
+    //Contructor
     public Casilla(int fila, int columna) {
         this.fila = fila;
         this.columna = columna;
@@ -31,16 +30,8 @@ public class Casilla {
         return fila;
     }
 
-    public void setFila(int fila) {
-        this.fila = fila;
-    }
-
     public int getColumna() {
         return columna;
-    }
-
-    public void setColumna(int columna) {
-        this.columna = columna;
     }
 
     public Pieza getPieza() {

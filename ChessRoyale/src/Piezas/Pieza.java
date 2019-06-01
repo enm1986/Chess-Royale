@@ -5,7 +5,7 @@
  */
 package Piezas;
 
-import Juego.Jugador;
+import Juego.Color;
 
 /**
  *
@@ -13,18 +13,19 @@ import Juego.Jugador;
  */
 public abstract class Pieza {
 
-    protected Jugador jugador;
+    protected Color color;
 
-    public Pieza(Jugador jugador) {
-        this.jugador = jugador;
+    public Pieza(Color color) {
+        this.color = color;
     }
 
-    public Jugador getJugador() {
-        return jugador;
+    public Color getColor() {
+        return color;
     }
-
-    abstract public boolean movimientoValido(int f_origen, int c_origen, int f_destino, int c_destino);
 
     abstract public Tipo getTipo();
 
+    abstract public boolean movimientoValido(int f_origen, int c_origen, int f_destino, int c_destino);
+
+    
 }

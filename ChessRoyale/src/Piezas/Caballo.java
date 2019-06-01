@@ -5,7 +5,8 @@
  */
 package Piezas;
 
-import Juego.Jugador;
+import Juego.Color;
+
 
 /**
  * Clase Caballo
@@ -14,13 +15,18 @@ import Juego.Jugador;
  */
 public class Caballo extends Pieza {
 
-    private Tipo tipo;
+    private final Tipo tipo;
 
-    public Caballo(Jugador jugador) {
-        super(jugador);
+    public Caballo(Color color) {
+        super(color);
         this.tipo = Tipo.CABALLO;
     }
-
+    
+    @Override
+    public Tipo getTipo() {
+        return this.tipo;
+    }
+    
     @Override
     public boolean movimientoValido(int f_origen, int c_origen, int f_destino, int c_destino) {
 
@@ -30,9 +36,6 @@ public class Caballo extends Pieza {
         return ((f_diferencia * f_diferencia) + (c_diferencia * c_diferencia) == 5);
     }
 
-    @Override
-    public Tipo getTipo() {
-        return this.tipo;
-    }
+    
 
 }
