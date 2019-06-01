@@ -14,19 +14,20 @@ import java.awt.*;
  *
  * @author navar
  */
-public class PanelTablero extends JPanel {
+class PanelTablero extends JPanel {
 
     private final static Dimension DIMENSION_TABLERO = new Dimension(480, 480);
-    //private Tablero tablero;
+    private Tablero tablero;
     //private ArrayList<PanelCasilla> casillasTablero;
 
-    public PanelTablero() {
+    public PanelTablero(Tablero tablero) {
         super(new GridLayout(8, 8));
+        this.tablero = tablero;
         //this.casillasTablero = new ArrayList<>();
 
         for (int f = 0; f < 8; f++) {
             for (int c = 0; c < 8; c++) {
-                PanelCasilla casilla = new PanelCasilla(f, c, this);
+                PanelCasilla casilla = new PanelCasilla(f, c, this.tablero);
                 //this.casillasTablero.add(casilla);
                 this.add(casilla);
             }

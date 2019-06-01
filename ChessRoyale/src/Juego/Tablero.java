@@ -19,6 +19,11 @@ public final class Tablero {
     public Tablero() {
         this.tablero = new Casilla[8][8];
         generarTablero();
+        inicializarTablero();
+    }
+
+    public Casilla getCasilla(int fila, int columna) {
+        return this.tablero[fila][columna];
     }
 
     public void generarTablero() {
@@ -27,10 +32,6 @@ public final class Tablero {
                 this.tablero[f][c] = new Casilla(f, c);
             }
         }
-    }
-
-    public Casilla getCasilla(int fila, int columna) {
-        return this.tablero[fila][columna];
     }
 
     public void inicializarTablero() {

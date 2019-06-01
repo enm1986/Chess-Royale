@@ -40,8 +40,8 @@ public class Peon extends Pieza {
         boolean valido = false;
 
         if (f_destino != f_origen) {
-            if ((f_destino > f_origen && this.color == Color.NEGRAS)
-                    || (f_destino < f_origen && this.color == Color.BLANCAS)) {
+            if ((f_destino > f_origen && this.getColor() == Color.NEGRAS)
+                    || (f_destino < f_origen && this.getColor() == Color.BLANCAS)) {
                 if ((f_diferencia == 1) && ((diagonal == 0) || (diagonal == 1))) { // movimientos válidos del peón
                     valido = true;
                 } else if (!isMovido_1()) {

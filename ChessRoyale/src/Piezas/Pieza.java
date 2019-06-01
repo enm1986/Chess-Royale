@@ -13,7 +13,7 @@ import Juego.Color;
  */
 public abstract class Pieza {
 
-    protected Color color;
+    private Color color;
 
     public Pieza(Color color) {
         this.color = color;
@@ -27,5 +27,8 @@ public abstract class Pieza {
 
     abstract public boolean movimientoValido(int f_origen, int c_origen, int f_destino, int c_destino);
 
-    
+    public String getNombre() {
+        return this.getTipo().toString().substring(0, 1) + this.getColor().toString().substring(0, 1);
+    }
+
 }
