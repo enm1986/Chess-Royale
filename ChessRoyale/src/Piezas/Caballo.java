@@ -18,16 +18,8 @@ public class Caballo extends Pieza {
     private final static int[][] COORDENADAS_OFFSET
             = {{-1, -2}, {-2, -1}, {-2, 1}, {-1, 2}, {1, -2}, {2, -1}, {2, 1}, {1, 2}};
 
-    private final Tipo tipo;
-
     public Caballo(Color color) {
-        super(color);
-        this.tipo = Tipo.CABALLO;
-    }
-
-    @Override
-    public Tipo getTipo() {
-        return this.tipo;
+        super(Tipo.CABALLO, color);
     }
 
     @Override

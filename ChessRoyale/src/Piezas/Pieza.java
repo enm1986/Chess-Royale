@@ -14,17 +14,22 @@ import java.util.ArrayList;
  */
 public abstract class Pieza {
 
+    private Tipo tipo;
     private Color color;
 
-    public Pieza(Color color) {
+    public Pieza(Tipo tipo, Color color) {
+        this.tipo = tipo;
         this.color = color;
     }
 
     public Color getColor() {
-        return color;
+        return this.color;
     }
 
-    abstract public Tipo getTipo();
+    public Tipo getTipo() {
+        return this.tipo;
+    }
+
     abstract public ArrayList<Movimiento> movimientosValidos(Tablero tablero, Casilla casilla);
 
     public String getNombre() {

@@ -18,16 +18,9 @@ public class Torre extends Pieza {
 
     private final static int[][] COORDENADAS_OFFSET
             = {{0, -1}, {0, 1}, {1, 0}, {-1, 0}};
-    private final Tipo tipo;
 
     public Torre(Color color) {
-        super(color);
-        this.tipo = Tipo.TORRE;
-    }
-
-    @Override
-    public Tipo getTipo() {
-        return this.tipo;
+        super(Tipo.TORRE, color);
     }
 
     @Override

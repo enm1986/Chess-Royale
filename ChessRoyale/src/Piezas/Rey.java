@@ -18,16 +18,9 @@ public class Rey extends Pieza {
 
     private final static int[][] COORDENADAS_OFFSET
             = {{1, -1}, {1, 0}, {1, 1}, {0, -1}, {0, 1}, {-1, -1}, {-1, 0}, {-1, 1}};
-    private final Tipo tipo;
 
     public Rey(Color color) {
-        super(color);
-        this.tipo = Tipo.REY;
-    }
-
-    @Override
-    public Tipo getTipo() {
-        return this.tipo;
+        super(Tipo.REY, color);;
     }
 
     @Override

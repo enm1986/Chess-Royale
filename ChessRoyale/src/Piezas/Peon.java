@@ -17,13 +17,11 @@ import java.util.ArrayList;
 public class Peon extends Pieza {
 
     private final static int[][] COORDENADAS_OFFSET = {{1, 0}, {2, 0}, {1, -1}, {1, 1}};
-    private final Tipo tipo;
     private boolean primer_movimiento;
 
     public Peon(Color color) {
-        super(color);
+        super(Tipo.PEON, color);
         this.primer_movimiento = true;
-        this.tipo = Tipo.PEON;
     }
 
     public boolean isPrimer_movimiento() {
@@ -32,11 +30,6 @@ public class Peon extends Pieza {
 
     public void setPrimer_movimiento() {
         this.primer_movimiento = false;
-    }
-
-    @Override
-    public Tipo getTipo() {
-        return this.tipo;
     }
 
     @Override

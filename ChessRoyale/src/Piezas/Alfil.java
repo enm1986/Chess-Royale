@@ -18,16 +18,9 @@ public class Alfil extends Pieza {
 
     private final static int[][] COORDENADAS_OFFSET 
             = {{-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
-    private final Tipo tipo;
 
     public Alfil(Color color) {
-        super(color);
-        this.tipo = Tipo.ALFIL;
-    }
-
-    @Override
-    public Tipo getTipo() {
-        return this.tipo;
+        super(Tipo.ALFIL, color);
     }
 
     @Override

@@ -18,16 +18,9 @@ public class Dama extends Pieza {
 
     private final static int[][] COORDENADAS_OFFSET
             = {{-1, -1}, {-1, 1}, {1, -1}, {1, 1}, {0, -1}, {0, 1}, {1, 0}, {-1, 0}};
-    private final Tipo tipo;
 
     public Dama(Color color) {
-        super(color);
-        this.tipo = Tipo.DAMA;
-    }
-
-    @Override
-    public Tipo getTipo() {
-        return this.tipo;
+        super(Tipo.DAMA, color);
     }
 
     @Override

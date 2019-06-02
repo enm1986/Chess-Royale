@@ -120,7 +120,6 @@ public final class Tablero {
                 } else {
                     System.out.print(" |  ");
                 }
-
             }
             System.out.println(" |");
             System.out.println(" |___|___|___|___|___|___|___|___|");
