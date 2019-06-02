@@ -39,4 +39,6 @@ public abstract class Pieza {
     protected static boolean coordenadaValida(int[] coordenada) {
         return (coordenada[0] >= 0 && coordenada[0] <= 7 && coordenada[1] >= 0 && coordenada[1] <= 7);
     }
+    
+    
 }

@@ -10,5 +10,37 @@ package Piezas;
  * @author infor04
  */
 public enum Tipo {
-    PEON, ALFIL, TORRE, CABALLO, DAMA, REY 
+    PEON {
+        @Override
+        public boolean esRey() {
+            return false;
+        }
+    }, ALFIL {
+        @Override
+        public boolean esRey() {
+            return false;
+        }
+    }, TORRE {
+        @Override
+        public boolean esRey() {
+            return false;
+        }
+    }, CABALLO {
+        @Override
+        public boolean esRey() {
+            return false;
+        }
+    }, DAMA {
+        @Override
+        public boolean esRey() {
+            return false;
+        }
+    }, REY {
+        @Override
+        public boolean esRey() {
+            return true;
+        }
+    };
+
+    abstract public boolean esRey();
 }

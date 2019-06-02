@@ -18,11 +18,22 @@ public class Rey extends Pieza {
 
     private final static int[][] COORDENADAS_OFFSET
             = {{1, -1}, {1, 0}, {1, 1}, {0, -1}, {0, 1}, {-1, -1}, {-1, 0}, {-1, 1}};
+    private int contadorMovimientos;
 
     public Rey(Color color) {
-        super(Tipo.REY, color);;
+        super(Tipo.REY, color);
+        this.contadorMovimientos = 0;
     }
 
+    public int getContadorMovimientos() {
+        return contadorMovimientos;
+    }
+
+    public void setContadorMovimientos() {
+        this.contadorMovimientos++;
+    }
+
+    
     @Override
     public ArrayList<Casilla> movimientosValidos(Tablero tablero, Casilla origen) {
         //ArrayList<Movimiento> lista = new ArrayList<>();

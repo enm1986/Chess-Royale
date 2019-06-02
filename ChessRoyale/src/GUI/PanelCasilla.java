@@ -14,15 +14,15 @@ import static GUI.Ventana.girarTableroAuto;
 import static GUI.Ventana.mostrarMovimientos;
 import Juego.Casilla;
 import Juego.Tablero;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
-
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import javafx.scene.layout.Border;
 import javax.imageio.ImageIO;
 
 /**
@@ -33,6 +33,7 @@ public class PanelCasilla extends JPanel {
 
     private final static Color claro = new Color(255, 204, 153);
     private final static Color oscuro = new Color(102, 51, 0);
+    private final static Color borde = new Color(51, 204, 0);
 
     private final int fila;
     private final int columna;
@@ -59,6 +60,10 @@ public class PanelCasilla extends JPanel {
                             if (casillaDestino != casillaOrigen) {
                                 Piezas.Color turno = tablero.getJugadorActivo();
                                 tablero.ejecutarJugada(casillaOrigen, casillaDestino);
+                                if (tablero.isFin()) {
+                                    JOptionPane.showMessageDialog(null, "Han ganado las " + tablero.getJugadorActivo());
+                                    tablero.reiniciarTablero();
+                                }
                                 if (girarTableroAuto && tablero.getJugadorActivo() != turno) { // si a cambiado de turno gira el tablero
                                     direccionTablero = direccionTablero.girarTablero();
                                 }
@@ -116,6 +121,7 @@ public class PanelCasilla extends JPanel {
         } else {
             this.setBackground(oscuro);
         }
+        this.setBorder(null);
     }
 
     private void dibujarPieza(Tablero tablero) {
@@ -135,12 +141,15 @@ public class PanelCasilla extends JPanel {
         if (mostrarMovimientos && casillaOrigen != null && casillaOrigen.isOcupada()) {
             for (Casilla punto : casillaOrigen.getPieza().movimientosValidos(tablero, casillaOrigen)) {
                 if (this.fila == punto.getFila() && this.columna == punto.getColumna()) {
+                    //this.setBorder(BorderFactory.createDashedBorder(Color.GREEN));
+                    this.setBorder(BorderFactory.createDashedBorder(borde, 4, 3, 2, true));
+                    /*
                     try {
                         BufferedImage icono = ImageIO.read(new File("img/punto.png"));
-                        this.add(new JLabel(new ImageIcon(icono)));
+                        this.add(new JLabel(new ImageIcon(icono)));                        
                     } catch (IOException ex) {
                         System.out.println("Imagen no encontrada: img/punto.png");
-                    }
+                    }*/
                 }
             }
         }

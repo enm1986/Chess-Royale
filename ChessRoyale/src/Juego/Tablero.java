@@ -13,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author infor04
  */
-public final class Tablero {
+public class Tablero {
 
     private Casilla[][] tablero;
     private Color jugadorActivo;
@@ -46,6 +46,13 @@ public final class Tablero {
 
     private void cambiarJugadorActivo() {
         this.jugadorActivo = this.jugadorActivo.cambiarJugador();
+    }
+    
+    public void reiniciarTablero(){
+        this.fin = false;
+        this.jugadorActivo = Color.BLANCAS;
+        this.generarTablero();
+        this.inicializarTablero();
     }
 
     private void generarTablero() {
@@ -128,17 +135,22 @@ public final class Tablero {
                 if (casillaDestino.isOcupada()) {
                     piezaCapturada = casillaDestino.sacarPieza();
                 }
-                casillaDestino.setPieza(casillaOrigen.sacarPieza());
+                casillaDestino.setPieza(casillaOrigen.sacarPieza()); 
                 if (piezaCapturada instanceof Rey) {
                     this.setFin();
                 } else {
+                    if(casillaDestino.getPieza().getTipo().esRey()){
+                        ((Rey)casillaDestino.getPieza()).setContadorMovimientos();
+                        if (((Rey)casillaDestino.getPieza()).getContadorMovimientos()>10){
+                            this.setFin();
+                        }
+                    }
                     this.cambiarJugadorActivo();
                 }
             } else {
                 i++;
             }
         }
-        System.out.println("Juegan: " + this.jugadorActivo);
     }
 
     public void mostrarTablero() {

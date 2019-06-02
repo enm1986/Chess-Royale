@@ -38,6 +38,7 @@ public class Ventana extends JFrame {
         this.ventana = new JFrame("Chess Royale");
         this.ventana.setLayout(new BorderLayout());
         this.ventana.setSize(DIMENSION_VENTANA);
+
         this.ventana.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         this.menu = new JMenuBar();
@@ -51,6 +52,7 @@ public class Ventana extends JFrame {
         direccionTablero = DireccionTablero.NORMAL;
         this.ventana.add(this.panelTablero, BorderLayout.CENTER);
 
+        this.ventana.setLocationRelativeTo(null); //centrar ventana
         this.ventana.setVisible(true);
     }
 
@@ -61,6 +63,16 @@ public class Ventana extends JFrame {
 
     private JMenu crearPestanaArchivo() {
         JMenu archivo = new JMenu("Archivo");
+
+        JMenuItem reiniciar = new JMenuItem("Reiniciar partida");
+        reiniciar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tablero.reiniciarTablero();
+                panelTablero.dibujarTableroGUI();
+            }
+        });
+        archivo.add(reiniciar);
 
         JMenuItem guardarPartida = new JMenuItem("Guardar partida...");
         guardarPartida.addActionListener(new ActionListener() {
@@ -95,7 +107,7 @@ public class Ventana extends JFrame {
             }
         });
         opciones.add(girar);
-        
+
         opciones.addSeparator();
 
         JCheckBoxMenuItem giroAuto = new JCheckBoxMenuItem("Giro automático");
