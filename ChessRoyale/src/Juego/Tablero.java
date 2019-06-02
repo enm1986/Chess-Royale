@@ -7,6 +7,7 @@ package Juego;
 
 import Piezas.Color;
 import Piezas.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -28,7 +29,7 @@ public final class Tablero {
     public Casilla getCasilla(int fila, int columna) {
         return this.tablero[fila][columna];
     }
-
+    
     public Color getJugadorActivo() {
         return jugadorActivo;
     }
@@ -104,7 +105,23 @@ public final class Tablero {
                 }
             }
         }
+    }
 
+    public void ejecutarJugada(Casilla casillaOrigen, Casilla casillaDestino) {
+        System.out.println("JUGADA:");
+        ArrayList<Casilla> lista = casillaOrigen.getPieza().movimientosValidos(this, casillaOrigen);
+        boolean movimientoValido = false;
+        int i = 0;
+        while (!movimientoValido && i < lista.size()) {
+            if (lista.get(i) == casillaDestino) {
+                movimientoValido = true;
+                casillaDestino.setPieza(casillaOrigen.vaciarCasilla());
+                this.cambiarJugadorActivo();
+            }else{
+                i++;
+            }
+        }
+        System.out.println(this.jugadorActivo);
     }
 
     public void mostrarTablero() {
@@ -126,4 +143,5 @@ public final class Tablero {
         }
         System.out.println("");
     }
+
 }

@@ -24,8 +24,9 @@ public class Dama extends Pieza {
     }
 
     @Override
-    public ArrayList<Movimiento> movimientosValidos(Tablero tablero, Casilla origen) {
-        ArrayList<Movimiento> lista = new ArrayList<>();
+    public ArrayList<Casilla> movimientosValidos(Tablero tablero, Casilla origen) {
+        //ArrayList<Movimiento> lista = new ArrayList<>();
+        ArrayList<Casilla> lista = new ArrayList<>();
         int[] coordenadaDestino = {0, 0};
         for (int[] coordenadaOffset : COORDENADAS_OFFSET) {
             coordenadaDestino[0] = origen.getFila() + coordenadaOffset[0];
@@ -34,16 +35,18 @@ public class Dama extends Pieza {
             while (coordenadaValida(coordenadaDestino) && !piezaBloquea) {
                 Casilla destino = tablero.getCasilla(coordenadaDestino[0], coordenadaDestino[1]);
                 if (!destino.isOcupada()) {
-                    lista.add(new MovimientoSimple(tablero, origen, destino));
+                    //lista.add(new MovimientoSimple(tablero, origen, destino));
+                    lista.add(destino);
                 } else {
                     if (this.getColor() != destino.getPieza().getColor()) {
-                        lista.add(new MovimientoAtaque(tablero, origen, destino));
+                        //lista.add(new MovimientoAtaque(tablero, origen, destino));
+                        lista.add(destino);
                     }
                     piezaBloquea = true;
                 }
                 if (!piezaBloquea) {
-                    coordenadaDestino[0] = origen.getFila() + coordenadaOffset[0];
-                    coordenadaDestino[1] = origen.getColumna() + coordenadaOffset[1];
+                    coordenadaDestino[0] = coordenadaDestino[0] + coordenadaOffset[0];
+                    coordenadaDestino[1] = coordenadaDestino[1] + coordenadaOffset[1];
                 }
             }
         }

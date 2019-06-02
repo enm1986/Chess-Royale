@@ -12,29 +12,16 @@ import Piezas.Color;
  * @author infor04
  */
 public class Jugador {
-    private String nombre;
+
     private Color color;
-
     
-    public Jugador(String nombre, Color color) {
-        this.nombre = nombre;
+
+    public Jugador(Color color) {
         this.color = color;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public Color getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
-    }
-   
 }

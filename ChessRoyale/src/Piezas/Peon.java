@@ -33,8 +33,9 @@ public class Peon extends Pieza {
     }
 
     @Override
-    public ArrayList<Movimiento> movimientosValidos(Tablero tablero, Casilla origen) {
-        ArrayList<Movimiento> lista = new ArrayList<>();
+    public ArrayList<Casilla> movimientosValidos(Tablero tablero, Casilla origen) {
+        //ArrayList<Movimiento> lista = new ArrayList<>();
+        ArrayList<Casilla> lista = new ArrayList<>();
         int[] coordenadaDestino = {0, 0};
         for (int[] coordenadaOffset : COORDENADAS_OFFSET) {
             coordenadaDestino[0] = origen.getFila() + coordenadaOffset[0] * this.getColor().getDireccion();
@@ -43,14 +44,18 @@ public class Peon extends Pieza {
                 Casilla destino = tablero.getCasilla(coordenadaDestino[0], coordenadaDestino[1]);
                 if (coordenadaOffset[1] == 0 && !destino.isOcupada()) {//Movimiento
                     if (coordenadaOffset[0] == 2 && this.isPrimer_movimiento()) {//movimiento de 2 casillas
-                        lista.add(new MovimientoSimple(tablero, origen, destino));
+                        Casilla anterior = tablero.getCasilla(origen.getFila() + this.getColor().getDireccion(), origen.getColumna());
+                        if (!anterior.isOcupada()) {
+                            //lista.add(new MovimientoSimple(tablero, origen, destino));
+                            lista.add(destino);
+                        }
                     } else {//movimiento de 1 casilla
-                        lista.add(new MovimientoSimple(tablero, origen, destino));
+                        //lista.add(new MovimientoSimple(tablero, origen, destino));
+                        lista.add(destino);
                     }
-                } else {//Ataque
-                    if (this.getColor() != destino.getPieza().getColor()) {
-                        lista.add(new MovimientoAtaque(tablero, origen, destino));
-                    }
+                } else if (coordenadaOffset[1] != 0 && destino.isOcupada() && this.getColor() != destino.getPieza().getColor()) {//Ataque
+                    //lista.add(new MovimientoAtaque(tablero, origen, destino));
+                    lista.add(destino);
                 }
             }
         }

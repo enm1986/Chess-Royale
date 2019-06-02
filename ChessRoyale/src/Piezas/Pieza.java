@@ -30,7 +30,7 @@ public abstract class Pieza {
         return this.tipo;
     }
 
-    abstract public ArrayList<Movimiento> movimientosValidos(Tablero tablero, Casilla casilla);
+    abstract public ArrayList<Casilla> movimientosValidos(Tablero tablero, Casilla casilla);
 
     public String getNombre() {
         return this.getTipo().toString().substring(0, 1) + this.getColor().toString().substring(0, 1);

@@ -5,6 +5,8 @@
  */
 package Juego;
 
+import java.util.ArrayList;
+
 
 /**
  *
@@ -22,5 +24,5 @@ public abstract class Movimiento {
         this.casillaOrigen = casillaOrigen;
         this.casillaDestino = casillaDestino;
     }
-
+    
 }

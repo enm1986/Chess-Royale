@@ -45,14 +45,15 @@ public class PanelCasilla extends JPanel {
                 switch (e.getButton()) {
                     case 1: //Botón izquierdo del ratón
                         if (casillaOrigen == null) { //primer click
-                            if (tablero.getCasilla(fila, columna).isOcupada()) {
+                            if (tablero.getCasilla(fila, columna).isOcupada()
+                                    && tablero.getCasilla(fila, columna).getPieza().getColor() == tablero.getJugadorActivo()) {
                                 casillaOrigen = tablero.getCasilla(fila, columna);
-                                //casillaOrigen.mostrarCasilla();
+                                casillaOrigen.mostrarCasilla();
                             }
                         } else { //segundo click
                             casillaDestino = tablero.getCasilla(fila, columna);
-                            //casillaDestino.mostrarCasilla();
-                            //tablero.ejecutarJugada
+                            casillaDestino.mostrarCasilla();
+                            tablero.ejecutarJugada(casillaOrigen, casillaDestino);
                             casillaOrigen = null; // resetea las selecciones
                             casillaDestino = null;
                         }
