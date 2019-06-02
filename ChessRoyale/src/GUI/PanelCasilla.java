@@ -141,7 +141,6 @@ public class PanelCasilla extends JPanel {
         if (mostrarMovimientos && casillaOrigen != null && casillaOrigen.isOcupada()) {
             for (Casilla punto : casillaOrigen.getPieza().movimientosValidos(tablero, casillaOrigen)) {
                 if (this.fila == punto.getFila() && this.columna == punto.getColumna()) {
-                    //this.setBorder(BorderFactory.createDashedBorder(Color.GREEN));
                     this.setBorder(BorderFactory.createDashedBorder(borde, 4, 3, 2, true));
                     /*
                     try {
