@@ -18,16 +18,18 @@ import javax.swing.*;
  */
 public class Ventana extends JFrame {
 
-    final static String RUTA_IMAGEN = "img/";
+    final static String RUTA_IMAGEN = "img/picasso/";
     final static Dimension DIMENSION_VENTANA = new Dimension(600, 600);
     final static Dimension DIMENSION_TABLERO = new Dimension(480, 480);
     final static Dimension DIMENSION_CASILLA = new Dimension(60, 60);
     static DireccionTablero direccionTablero;
+    static boolean girarTableroAuto;
+    static boolean mostrarMovimientos;
 
     private JFrame ventana;
     private JMenuBar menu;
     private PanelTablero panelTablero;
-    
+
     private Tablero tablero;
     static Casilla casillaOrigen;
     static Casilla casillaDestino;
@@ -39,6 +41,8 @@ public class Ventana extends JFrame {
         this.ventana.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         this.menu = new JMenuBar();
+        mostrarMovimientos = false;
+        girarTableroAuto = false;
         prepararMenu(this.menu);
         this.ventana.setJMenuBar(this.menu);
 
@@ -87,16 +91,27 @@ public class Ventana extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 direccionTablero = direccionTablero.girarTablero();
-                panelTablero.dibujarTableroGUI(tablero);
+                panelTablero.dibujarTableroGUI();
             }
         });
         opciones.add(girar);
+        
+        opciones.addSeparator();
 
-        JMenuItem verMov = new JMenuItem("Ver movimientos");
+        JCheckBoxMenuItem giroAuto = new JCheckBoxMenuItem("Giro automático");
+        giroAuto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                girarTableroAuto = giroAuto.isSelected();
+            }
+        });
+        opciones.add(giroAuto);
+
+        JCheckBoxMenuItem verMov = new JCheckBoxMenuItem("Ver movimientos");
         verMov.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Mostrar movimientos");
+                mostrarMovimientos = verMov.isSelected();
             }
         });
         opciones.add(verMov);

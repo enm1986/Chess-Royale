@@ -10,6 +10,9 @@ import static GUI.Ventana.RUTA_IMAGEN;
 import static GUI.Ventana.casillaOrigen;
 import static GUI.Ventana.casillaDestino;
 import static GUI.Ventana.direccionTablero;
+import static GUI.Ventana.girarTableroAuto;
+import static GUI.Ventana.mostrarMovimientos;
+import Juego.Casilla;
 import Juego.Tablero;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -19,6 +22,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 /**
@@ -55,18 +59,20 @@ public class PanelCasilla extends JPanel {
                             if (casillaDestino != casillaOrigen) {
                                 Piezas.Color turno = tablero.getJugadorActivo();
                                 tablero.ejecutarJugada(casillaOrigen, casillaDestino);
-                                if (tablero.getJugadorActivo() != turno) { // si a cambiado de turno gira el tablero
+                                if (girarTableroAuto && tablero.getJugadorActivo() != turno) { // si a cambiado de turno gira el tablero
                                     direccionTablero = direccionTablero.girarTablero();
                                 }
                             }
                             casillaOrigen = null; // resetea las selecciones
                             casillaDestino = null;
                         }
-                        tableroGUI.dibujarTableroGUI(tablero);
+
+                        tableroGUI.dibujarTableroGUI();
                         break;
                     case 3: //Botón derecho del ratón - cancela selección
                         casillaOrigen = null;
                         casillaDestino = null;
+                        tableroGUI.dibujarTableroGUI();
                         break;
                 }
             }
@@ -98,6 +104,7 @@ public class PanelCasilla extends JPanel {
         removeAll();
         this.colorearCasilla();
         this.dibujarPieza(tablero);
+        this.dibujarPunto(tablero);
         this.validate();
         this.repaint();
     }
@@ -120,6 +127,21 @@ public class PanelCasilla extends JPanel {
                 this.add(new JLabel(new ImageIcon(icono)));
             } catch (IOException ex) {
                 System.out.println("Imagen no encontrada: " + RUTA_IMAGEN + tablero.getCasilla(this.fila, this.columna).getPieza().getNombre() + ".gif");
+            }
+        }
+    }
+
+    public void dibujarPunto(Tablero tablero) {
+        if (mostrarMovimientos && casillaOrigen != null && casillaOrigen.isOcupada()) {
+            for (Casilla punto : casillaOrigen.getPieza().movimientosValidos(tablero, casillaOrigen)) {
+                if (this.fila == punto.getFila() && this.columna == punto.getColumna()) {
+                    try {
+                        BufferedImage icono = ImageIO.read(new File("img/punto.png"));
+                        this.add(new JLabel(new ImageIcon(icono)));
+                    } catch (IOException ex) {
+                        System.out.println("Imagen no encontrada: img/punto.png");
+                    }
+                }
             }
         }
     }
