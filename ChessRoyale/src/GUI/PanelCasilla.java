@@ -5,42 +5,98 @@
  */
 package GUI;
 
+import static GUI.Ventana.casillaOrigen;
+import static GUI.Ventana.casillaDestino;
 import Juego.Tablero;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 /**
  *
  * @author navar
  */
-class PanelCasilla extends JPanel {
+public class PanelCasilla extends JPanel {
 
     private final static String RUTA_IMAGEN = "img/";
-    private final static Dimension DIMENSION_CASILLA = new Dimension(10, 10);
+    private final static Dimension DIMENSION_CASILLA = new Dimension(60, 60);
     private final static Color claro = new Color(255, 204, 153);
     private final static Color oscuro = new Color(102, 51, 0);
 
     private final int fila;
     private final int columna;
 
-    public PanelCasilla(int fila, int columna, Tablero tablero) {
+    public PanelCasilla(int fila, int columna, Tablero tablero, PanelTablero tableroGUI) {
         super(new GridBagLayout());
         this.fila = fila;
         this.columna = columna;
         this.setPreferredSize(DIMENSION_CASILLA);
-        this.darColor();
-        this.dibujarPieza(tablero);
+        this.dibujarCasilla(tablero);
+        this.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                switch (e.getButton()) {
+                    case 1: //Botón izquierdo del ratón
+                        if (casillaOrigen == null) { //primer click
+                            if (tablero.getCasilla(fila, columna).isOcupada()) {
+                                casillaOrigen = tablero.getCasilla(fila, columna);
+                                //casillaOrigen.mostrarCasilla();
+                            }
+                        } else { //segundo click
+                            casillaDestino = tablero.getCasilla(fila, columna);
+                            //casillaDestino.mostrarCasilla();
+                            //tablero.ejecutarJugada
+                            casillaOrigen = null; // resetea las selecciones
+                            casillaDestino = null;
+                        }
+                        tableroGUI.dibujarTablero(tablero);
+                        break;
+                    case 3: //Botón derecho del ratón - cancela selección
+                        casillaOrigen = null; // 
+                        casillaDestino = null;
+                        break;
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+
         this.validate();
     }
 
-    private void darColor() {
+    private void dibujarCasilla(Tablero tablero) {
+        this.colorearCasilla();
+        this.dibujarPieza(tablero);
+        this.validate();
+        this.repaint();
+    }
+
+    private void colorearCasilla() {
         if ((this.fila % 2 == 0 && this.columna % 2 == 0) || (this.fila % 2 != 0 && this.columna % 2 != 0)) {
             this.setBackground(claro);
         } else {
@@ -56,6 +112,7 @@ class PanelCasilla extends JPanel {
                         = ImageIO.read(new File(RUTA_IMAGEN + tablero.getCasilla(this.fila, this.columna).getPieza().getNombre() + ".gif"));
                 this.add(new JLabel(new ImageIcon(icono)));
             } catch (IOException ex) {
+                System.out.println("Imagen no encontrada: " + RUTA_IMAGEN + tablero.getCasilla(this.fila, this.columna).getPieza().getNombre() + ".gif");
                 ex.printStackTrace();
             }
         }

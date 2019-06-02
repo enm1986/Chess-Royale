@@ -5,7 +5,10 @@
  */
 package Piezas;
 
-import Juego.Color;
+import Juego.Casilla;
+import Juego.Movimiento;
+import Juego.Tablero;
+import java.util.ArrayList;
 
 /**
  *
@@ -24,11 +27,13 @@ public abstract class Pieza {
     }
 
     abstract public Tipo getTipo();
-
-    abstract public boolean movimientoValido(int f_origen, int c_origen, int f_destino, int c_destino);
+    abstract public ArrayList<Movimiento> movimientosValidos(Tablero tablero, Casilla casilla);
 
     public String getNombre() {
         return this.getTipo().toString().substring(0, 1) + this.getColor().toString().substring(0, 1);
     }
 
+    protected static boolean coordenadaValida(int[] coordenada) {
+        return (coordenada[0] >= 0 && coordenada[0] <= 7 && coordenada[1] >= 0 && coordenada[1] <= 7);
+    }
 }

@@ -5,6 +5,7 @@
  */
 package Juego;
 
+import Piezas.Color;
 import Piezas.*;
 
 /**

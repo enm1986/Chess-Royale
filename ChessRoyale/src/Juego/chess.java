@@ -5,7 +5,7 @@
  */
 package Juego;
 
-import GUI.Ventana2;
+import GUI.Ventana;
 
 /**
  *
@@ -18,7 +18,7 @@ public class chess {
         //Jugador blanco = new Jugador("Eugenio", Color.BLANCAS);
         //Jugador negro = new Jugador("Carlos", Color.NEGRAS);
         
-        Ventana2 ventana = new Ventana2();
+        Ventana ventana = new Ventana();
 
     }
 }

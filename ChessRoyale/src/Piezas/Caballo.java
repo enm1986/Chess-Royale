@@ -5,8 +5,12 @@
  */
 package Piezas;
 
-import Juego.Color;
-
+import Juego.Casilla;
+import Juego.Movimiento;
+import Juego.MovimientoAtaque;
+import Juego.MovimientoSimple;
+import Juego.Tablero;
+import java.util.ArrayList;
 
 /**
  * Clase Caballo
@@ -15,27 +19,42 @@ import Juego.Color;
  */
 public class Caballo extends Pieza {
 
+    private final static int[][] COORDENADAS_OFFSET
+            = {{-1, -2}, {-2, -1}, {-2, 1}, {-1, 2}, {1, -2}, {2, -1}, {2, 1}, {1, 2}};
+
     private final Tipo tipo;
 
     public Caballo(Color color) {
         super(color);
         this.tipo = Tipo.CABALLO;
     }
-    
+
     @Override
     public Tipo getTipo() {
         return this.tipo;
     }
-    
+
     @Override
-    public boolean movimientoValido(int f_origen, int c_origen, int f_destino, int c_destino) {
+    public ArrayList<Movimiento> movimientosValidos(Tablero tablero, Casilla origen) {
+        ArrayList<Movimiento> lista = new ArrayList<>();
 
-        int f_diferencia = Math.abs(f_destino - f_origen);
-        int c_diferencia = Math.abs(c_destino - c_origen);
+        int[] coordenadaDestino = {0, 0};
 
-        return ((f_diferencia * f_diferencia) + (c_diferencia * c_diferencia) == 5);
+        for (int[] coordenadaOffset : COORDENADAS_OFFSET) {
+            coordenadaDestino[0] = origen.getFila() + coordenadaOffset[0];
+            coordenadaDestino[1] = origen.getColumna() + coordenadaOffset[1];
+            if (coordenadaValida(coordenadaDestino)) {
+                Casilla destino = tablero.getCasilla(coordenadaDestino[0], coordenadaDestino[1]);
+                if (!destino.isOcupada()) {
+                    lista.add(new MovimientoSimple(tablero, origen, destino));
+                } else {
+                    if (this.getColor() != destino.getPieza().getColor()) {
+                        lista.add(new MovimientoAtaque(tablero, origen, destino));
+                    }
+                }
+            }
+        }
+        return lista;
     }
-
-    
 
 }

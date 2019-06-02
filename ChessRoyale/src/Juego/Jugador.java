@@ -5,6 +5,8 @@
  */
 package Juego;
 
+import Piezas.Color;
+
 /**
  *
  * @author infor04

@@ -56,5 +56,15 @@ public class Casilla {
         this.pieza = null;
         return pieza;
     }
+    
+    public void mostrarCasilla(){
+        System.out.println("coordenadas: "+this.getFila()+","+this.getColumna());
+        if(this.isOcupada()){
+            System.out.println("Pieza: "+this.getPieza().getTipo()+" "+this.getPieza().getColor());
+        } else {
+            System.out.println("Pieza: NO");
+        }
+        
+    }
 
 }

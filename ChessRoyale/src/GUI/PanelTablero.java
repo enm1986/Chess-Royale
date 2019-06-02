@@ -14,8 +14,8 @@ import java.awt.*;
  *
  * @author navar
  */
-class PanelTablero extends JPanel {
-
+public class PanelTablero extends JPanel {
+    
     private final static Dimension DIMENSION_TABLERO = new Dimension(480, 480);
     private Tablero tablero;
     //private ArrayList<PanelCasilla> casillasTablero;
@@ -25,15 +25,22 @@ class PanelTablero extends JPanel {
         this.tablero = tablero;
         //this.casillasTablero = new ArrayList<>();
 
+        this.dibujarTablero(tablero);
+        this.setPreferredSize(DIMENSION_TABLERO);
+        this.validate();
+    }
+    
+    public void dibujarTablero(Tablero tablero) {
+        this.removeAll();
         for (int f = 0; f < 8; f++) {
             for (int c = 0; c < 8; c++) {
-                PanelCasilla casilla = new PanelCasilla(f, c, this.tablero);
+                PanelCasilla casilla = new PanelCasilla(f, c, this.tablero, this);
                 //this.casillasTablero.add(casilla);
                 this.add(casilla);
             }
         }
-        this.setPreferredSize(DIMENSION_TABLERO);
         this.validate();
+        this.repaint();
     }
-
+    
 }

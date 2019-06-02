@@ -5,7 +5,13 @@
  */
 package Piezas;
 
-import Juego.Color;
+import Juego.Casilla;
+import Juego.Movimiento;
+import Juego.MovimientoAtaque;
+import Juego.MovimientoSimple;
+import Juego.Tablero;
+import static Piezas.Pieza.coordenadaValida;
+import java.util.ArrayList;
 
 /**
  * Clase Peón
@@ -14,44 +20,22 @@ import Juego.Color;
  */
 public class Peon extends Pieza {
 
+    private final static int[][] COORDENADAS_OFFSET = {{1, 0}, {2, 0}, {1, -1}, {1, 1}};
     private final Tipo tipo;
-    private boolean movido_1;
+    private boolean primer_movimiento;
 
     public Peon(Color color) {
         super(color);
-        this.movido_1 = false;
+        this.primer_movimiento = true;
         this.tipo = Tipo.PEON;
     }
 
-    public boolean isMovido_1() {
-        return movido_1;
+    public boolean isPrimer_movimiento() {
+        return primer_movimiento;
     }
 
-    public void setMovido_1(boolean movido_1) {
-        this.movido_1 = movido_1;
-    }
-
-    @Override
-    public boolean movimientoValido(int f_origen, int c_origen, int f_destino, int c_destino) {
-
-        int f_diferencia = Math.abs(f_destino - f_origen);
-        int diagonal = Math.abs(c_destino - c_origen);
-
-        boolean valido = false;
-
-        if (f_destino != f_origen) {
-            if ((f_destino > f_origen && this.getColor() == Color.NEGRAS)
-                    || (f_destino < f_origen && this.getColor() == Color.BLANCAS)) {
-                if ((f_diferencia == 1) && ((diagonal == 0) || (diagonal == 1))) { // movimientos válidos del peón
-                    valido = true;
-                } else if (!isMovido_1()) {
-                    if ((f_diferencia == 2) && (diagonal == 0)) { //movimiento válido del peón en primer movimiento
-                        valido = true;
-                    }
-                }
-            }
-        }
-        return valido;
+    public void setPrimer_movimiento() {
+        this.primer_movimiento = false;
     }
 
     @Override
@@ -59,4 +43,28 @@ public class Peon extends Pieza {
         return this.tipo;
     }
 
+    @Override
+    public ArrayList<Movimiento> movimientosValidos(Tablero tablero, Casilla origen) {
+        ArrayList<Movimiento> lista = new ArrayList<>();
+        int[] coordenadaDestino = {0, 0};
+        for (int[] coordenadaOffset : COORDENADAS_OFFSET) {
+            coordenadaDestino[0] = origen.getFila() + coordenadaOffset[0] * this.getColor().getDireccion();
+            coordenadaDestino[1] = origen.getColumna() + coordenadaOffset[1];
+            if (coordenadaValida(coordenadaDestino)) {
+                Casilla destino = tablero.getCasilla(coordenadaDestino[0], coordenadaDestino[1]);
+                if (coordenadaOffset[1] == 0 && !destino.isOcupada()) {//Movimiento
+                    if (coordenadaOffset[0] == 2 && this.isPrimer_movimiento()) {//movimiento de 2 casillas
+                        lista.add(new MovimientoSimple(tablero, origen, destino));
+                    } else {//movimiento de 1 casilla
+                        lista.add(new MovimientoSimple(tablero, origen, destino));
+                    }
+                } else {//Ataque
+                    if (this.getColor() != destino.getPieza().getColor()) {
+                        lista.add(new MovimientoAtaque(tablero, origen, destino));
+                    }
+                }
+            }
+        }
+        return lista;
+    }
 }
