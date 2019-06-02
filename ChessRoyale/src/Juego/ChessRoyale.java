@@ -11,16 +11,9 @@ import GUI.Ventana;
  *
  * @author infor04
  */
-public class chess {
+public class ChessRoyale {
 
     public static void main(String[] args) {
-
-        
-        Tablero tablero = new Tablero();
-        tablero.mostrarTablero();
-        tablero.getCasilla(2, 1).setPieza(tablero.getCasilla(1, 1).vaciarCasilla());
-        tablero.mostrarTablero();
-        
 
         Ventana ventana = new Ventana();
 

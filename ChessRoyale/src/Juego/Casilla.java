@@ -51,7 +51,7 @@ public class Casilla {
         return this.getPieza().getTipo().toString().substring(0, 1) + this.getPieza().getColor().toString().substring(0, 1);
     }
 
-    public Pieza vaciarCasilla() {
+    public Pieza sacarPieza() {
         Pieza pieza = this.pieza;
         this.pieza = null;
         return pieza;

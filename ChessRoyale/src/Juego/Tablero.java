@@ -17,24 +17,34 @@ public final class Tablero {
 
     private Casilla[][] tablero;
     private Color jugadorActivo;
+    private boolean fin;
 
     //constructor
     public Tablero() {
         this.tablero = new Casilla[8][8];
         this.generarTablero();
         this.inicializarTablero();
+        this.fin = false;
         this.jugadorActivo = Color.BLANCAS;
     }
 
     public Casilla getCasilla(int fila, int columna) {
         return this.tablero[fila][columna];
     }
-    
+
     public Color getJugadorActivo() {
         return jugadorActivo;
     }
 
-    public void cambiarJugadorActivo() {
+    public boolean isFin() {
+        return fin;
+    }
+
+    private void setFin() {
+        this.fin = true;
+    }
+
+    private void cambiarJugadorActivo() {
         this.jugadorActivo = this.jugadorActivo.cambiarJugador();
     }
 
@@ -65,10 +75,10 @@ public final class Tablero {
                                 this.getCasilla(f, c).setPieza(new Alfil(Color.NEGRAS));
                                 break;
                             case 3:
-                                this.getCasilla(f, c).setPieza(new Rey(Color.NEGRAS));
+                                this.getCasilla(f, c).setPieza(new Dama(Color.NEGRAS));
                                 break;
                             case 4:
-                                this.getCasilla(f, c).setPieza(new Dama(Color.NEGRAS));
+                                this.getCasilla(f, c).setPieza(new Rey(Color.NEGRAS));
                                 break;
                         }
                         break;
@@ -108,20 +118,27 @@ public final class Tablero {
     }
 
     public void ejecutarJugada(Casilla casillaOrigen, Casilla casillaDestino) {
-        System.out.println("JUGADA:");
         ArrayList<Casilla> lista = casillaOrigen.getPieza().movimientosValidos(this, casillaOrigen);
         boolean movimientoValido = false;
         int i = 0;
         while (!movimientoValido && i < lista.size()) {
             if (lista.get(i) == casillaDestino) {
                 movimientoValido = true;
-                casillaDestino.setPieza(casillaOrigen.vaciarCasilla());
-                this.cambiarJugadorActivo();
-            }else{
+                Pieza piezaCapturada = null;
+                if (casillaDestino.isOcupada()) {
+                    piezaCapturada = casillaDestino.sacarPieza();
+                }
+                casillaDestino.setPieza(casillaOrigen.sacarPieza());
+                if (piezaCapturada instanceof Rey) {
+                    this.setFin();
+                } else {
+                    this.cambiarJugadorActivo();
+                }
+            } else {
                 i++;
             }
         }
-        System.out.println(this.jugadorActivo);
+        System.out.println("Juegan: " + this.jugadorActivo);
     }
 
     public void mostrarTablero() {

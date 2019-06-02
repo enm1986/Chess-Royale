@@ -5,8 +5,11 @@
  */
 package GUI;
 
+import static GUI.Ventana.DIMENSION_CASILLA;
+import static GUI.Ventana.RUTA_IMAGEN;
 import static GUI.Ventana.casillaOrigen;
 import static GUI.Ventana.casillaDestino;
+import static GUI.Ventana.direccionTablero;
 import Juego.Tablero;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -24,8 +27,6 @@ import javax.imageio.ImageIO;
  */
 public class PanelCasilla extends JPanel {
 
-    private final static String RUTA_IMAGEN = "img/";
-    private final static Dimension DIMENSION_CASILLA = new Dimension(60, 60);
     private final static Color claro = new Color(255, 204, 153);
     private final static Color oscuro = new Color(102, 51, 0);
 
@@ -48,19 +49,23 @@ public class PanelCasilla extends JPanel {
                             if (tablero.getCasilla(fila, columna).isOcupada()
                                     && tablero.getCasilla(fila, columna).getPieza().getColor() == tablero.getJugadorActivo()) {
                                 casillaOrigen = tablero.getCasilla(fila, columna);
-                                casillaOrigen.mostrarCasilla();
                             }
                         } else { //segundo click
                             casillaDestino = tablero.getCasilla(fila, columna);
-                            casillaDestino.mostrarCasilla();
-                            tablero.ejecutarJugada(casillaOrigen, casillaDestino);
+                            if (casillaDestino != casillaOrigen) {
+                                Piezas.Color turno = tablero.getJugadorActivo();
+                                tablero.ejecutarJugada(casillaOrigen, casillaDestino);
+                                if (tablero.getJugadorActivo() != turno) { // si a cambiado de turno gira el tablero
+                                    direccionTablero = direccionTablero.girarTablero();
+                                }
+                            }
                             casillaOrigen = null; // resetea las selecciones
                             casillaDestino = null;
                         }
-                        tableroGUI.dibujarTablero(tablero);
+                        tableroGUI.dibujarTableroGUI(tablero);
                         break;
                     case 3: //Botón derecho del ratón - cancela selección
-                        casillaOrigen = null; // 
+                        casillaOrigen = null;
                         casillaDestino = null;
                         break;
                 }
@@ -86,11 +91,11 @@ public class PanelCasilla extends JPanel {
                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
-
         this.validate();
     }
 
-    private void dibujarCasilla(Tablero tablero) {
+    public void dibujarCasilla(Tablero tablero) {
+        removeAll();
         this.colorearCasilla();
         this.dibujarPieza(tablero);
         this.validate();
@@ -98,6 +103,7 @@ public class PanelCasilla extends JPanel {
     }
 
     private void colorearCasilla() {
+        removeAll();
         if ((this.fila % 2 == 0 && this.columna % 2 == 0) || (this.fila % 2 != 0 && this.columna % 2 != 0)) {
             this.setBackground(claro);
         } else {
@@ -114,7 +120,6 @@ public class PanelCasilla extends JPanel {
                 this.add(new JLabel(new ImageIcon(icono)));
             } catch (IOException ex) {
                 System.out.println("Imagen no encontrada: " + RUTA_IMAGEN + tablero.getCasilla(this.fila, this.columna).getPieza().getNombre() + ".gif");
-                ex.printStackTrace();
             }
         }
     }

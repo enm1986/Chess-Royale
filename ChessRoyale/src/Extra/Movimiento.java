@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Juego;
+package Extra;
 
+import Juego.Casilla;
+import Juego.Tablero;
 import java.util.ArrayList;
 
 

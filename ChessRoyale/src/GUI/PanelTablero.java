@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import static GUI.Ventana.DIMENSION_TABLERO;
+import static GUI.Ventana.direccionTablero;
 import Juego.Tablero;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -15,32 +17,45 @@ import java.awt.*;
  * @author navar
  */
 public class PanelTablero extends JPanel {
-    
-    private final static Dimension DIMENSION_TABLERO = new Dimension(480, 480);
+
     private Tablero tablero;
-    //private ArrayList<PanelCasilla> casillasTablero;
+    private ArrayList<PanelCasilla> casillasGUI;
 
     public PanelTablero(Tablero tablero) {
         super(new GridLayout(8, 8));
         this.tablero = tablero;
-        //this.casillasTablero = new ArrayList<>();
+        this.casillasGUI = new ArrayList<>();
 
-        this.dibujarTablero(tablero);
+        this.crearTableroGUI(tablero);
         this.setPreferredSize(DIMENSION_TABLERO);
         this.validate();
     }
-    
-    public void dibujarTablero(Tablero tablero) {
-        this.removeAll();
+
+    public ArrayList<PanelCasilla> getCasillasGUI() {
+        return casillasGUI;
+    }
+
+    public void crearTableroGUI(Tablero tablero) {
+        removeAll();
         for (int f = 0; f < 8; f++) {
             for (int c = 0; c < 8; c++) {
                 PanelCasilla casilla = new PanelCasilla(f, c, this.tablero, this);
-                //this.casillasTablero.add(casilla);
+                this.casillasGUI.add(casilla);
                 this.add(casilla);
             }
         }
         this.validate();
         this.repaint();
     }
-    
+
+    public void dibujarTableroGUI(Tablero tablero) {
+        removeAll();
+        for (PanelCasilla casillaGUI : direccionTablero.girar(this.casillasGUI)) {
+            casillaGUI.dibujarCasilla(tablero);
+            this.add(casillaGUI);
+        }
+        this.validate();
+        this.repaint();
+    }
+
 }
