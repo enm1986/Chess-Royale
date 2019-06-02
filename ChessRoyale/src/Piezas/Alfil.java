@@ -5,11 +5,7 @@
  */
 package Piezas;
 
-import Juego.Casilla;
-import Juego.Movimiento;
-import Juego.MovimientoAtaque;
-import Juego.MovimientoSimple;
-import Juego.Tablero;
+import Juego.*;
 import static Piezas.Pieza.coordenadaValida;
 import java.util.ArrayList;
 

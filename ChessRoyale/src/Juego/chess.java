@@ -14,10 +14,14 @@ import GUI.Ventana;
 public class chess {
 
     public static void main(String[] args) {
+
         
-        //Jugador blanco = new Jugador("Eugenio", Color.BLANCAS);
-        //Jugador negro = new Jugador("Carlos", Color.NEGRAS);
+        Tablero tablero = new Tablero();
+        tablero.mostrarTablero();
+        tablero.getCasilla(2, 1).setPieza(tablero.getCasilla(1, 1).vaciarCasilla());
+        tablero.mostrarTablero();
         
+
         Ventana ventana = new Ventana();
 
     }

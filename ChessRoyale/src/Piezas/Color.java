@@ -15,12 +15,24 @@ public enum Color {
         public int getDireccion() {
             return -1;
         }
+
+        @Override
+        public Color cambiarJugador() {
+            return NEGRAS;
+        }
     }, NEGRAS {
         @Override
         public int getDireccion() {
             return 1;
         }
+
+        @Override
+        public Color cambiarJugador() {
+            return BLANCAS;
+        }
     };
 
     abstract public int getDireccion();
+
+    abstract public Color cambiarJugador();
 }

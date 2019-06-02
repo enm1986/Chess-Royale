@@ -5,9 +5,7 @@
  */
 package Piezas;
 
-import Juego.Casilla;
-import Juego.Movimiento;
-import Juego.Tablero;
+import Juego.*;
 import java.util.ArrayList;
 
 /**

@@ -5,15 +5,17 @@
  */
 package Juego;
 
+
 /**
  *
  * @author navar
  */
-public class Movimiento {
+public abstract class Movimiento {
 
     private final Tablero tablero;
     private final Casilla casillaOrigen;
     private final Casilla casillaDestino;
+    
 
     public Movimiento(Tablero tablero, Casilla casillaOrigen, Casilla casillaDestino) {
         this.tablero = tablero;

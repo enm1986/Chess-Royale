@@ -15,19 +15,29 @@ import Piezas.*;
 public final class Tablero {
 
     private Casilla[][] tablero;
+    private Color jugadorActivo;
 
     //constructor
     public Tablero() {
         this.tablero = new Casilla[8][8];
-        generarTablero();
-        inicializarTablero();
+        this.generarTablero();
+        this.inicializarTablero();
+        this.jugadorActivo = Color.BLANCAS;
     }
 
     public Casilla getCasilla(int fila, int columna) {
         return this.tablero[fila][columna];
     }
 
-    public void generarTablero() {
+    public Color getJugadorActivo() {
+        return jugadorActivo;
+    }
+
+    public void cambiarJugadorActivo() {
+        this.jugadorActivo = this.jugadorActivo.cambiarJugador();
+    }
+
+    private void generarTablero() {
         for (int f = 0; f < tablero.length; f++) {
             for (int c = 0; c < tablero.length; c++) {
                 this.tablero[f][c] = new Casilla(f, c);
@@ -35,7 +45,7 @@ public final class Tablero {
         }
     }
 
-    public void inicializarTablero() {
+    private void inicializarTablero() {
         for (int f = 0; f < tablero.length; f++) {
             for (int c = 0; c < tablero.length; c++) {
                 switch (f) {
@@ -98,15 +108,23 @@ public final class Tablero {
     }
 
     public void mostrarTablero() {
+        System.out.println("  ___ ___ ___ ___ ___ ___ ___ ___ ");
         for (int f = 0; f < tablero.length; f++) {
             for (int c = 0; c < tablero.length; c++) {
                 if (this.getCasilla(f, c).getPieza() != null) {
-                    System.out.print(" | " + this.getCasilla(f, c).getPieza().getTipo().toString());
+                    if (this.getCasilla(f, c).getPieza().getColor() == Color.BLANCAS) {
+                        System.out.print(" | " + this.getCasilla(f, c).getPieza().getTipo().toString().substring(0, 1).toLowerCase());
+                    } else {
+                        System.out.print(" | " + this.getCasilla(f, c).getPieza().getTipo().toString().substring(0, 1));
+                    }
                 } else {
-                    System.out.print("  *  ");
+                    System.out.print(" |  ");
                 }
+
             }
-            System.out.println("");
+            System.out.println(" |");
+            System.out.println(" |___|___|___|___|___|___|___|___|");
         }
+        System.out.println("");
     }
 }

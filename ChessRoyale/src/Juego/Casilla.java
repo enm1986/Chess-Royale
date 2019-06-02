@@ -64,7 +64,5 @@ public class Casilla {
         } else {
             System.out.println("Pieza: NO");
         }
-        
     }
-
 }
