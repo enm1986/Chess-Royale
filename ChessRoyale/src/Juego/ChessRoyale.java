@@ -6,12 +6,22 @@
 package Juego;
 
 import GUI.Ventana;
+import java.awt.Dimension;
 
 /**
+ * Juego de ajedrez con alguna modificación en las reglas.
  *
- * @author infor04
+ *
+ * @author Eugenio Navarro
+ * @author Carlos Canovas
  */
 public class ChessRoyale {
+
+    public static int REY_MAX_MOV = 10;
+    public static String RUTA_IMAGEN = "img/picasso/";
+    public static Dimension DIMENSION_VENTANA = new Dimension(600, 600);
+    public static Dimension DIMENSION_TABLERO = new Dimension(480, 480);
+    public static Dimension DIMENSION_CASILLA = new Dimension(60, 60);
 
     public static void main(String[] args) {
 

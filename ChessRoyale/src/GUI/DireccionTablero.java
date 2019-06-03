@@ -10,7 +10,9 @@ import java.util.Collections;
 
 /**
  *
- * @author navar
+ * 
+ * @author Eugenio Navarro
+ * @author Carlos Canovas
  */
 public enum DireccionTablero {
     NORMAL {

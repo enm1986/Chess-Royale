@@ -5,27 +5,27 @@
  */
 package GUI;
 
-import static GUI.Ventana.DIMENSION_TABLERO;
+// imports de este paquete
 import static GUI.Ventana.direccionTablero;
-import static GUI.Ventana.mostrarMovimientos;
-import Juego.Casilla;
+
+// imports de paquete Juego
+import static Juego.ChessRoyale.DIMENSION_TABLERO;
 import Juego.Tablero;
+
+// imports de librerías
 import java.util.ArrayList;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 
 /**
  *
- * @author navar
+ * @author Eugenio Navarro
+ * @author Carlos Canovas
  */
-public class PanelTablero extends JPanel {
+public final class PanelTablero extends JPanel {
 
     private final Tablero tablero;
-    private ArrayList<PanelCasilla> casillasGUI;
+    private final ArrayList<PanelCasilla> casillasGUI;
 
     public PanelTablero(Tablero tablero) {
         super(new GridLayout(8, 8));

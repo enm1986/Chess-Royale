@@ -5,29 +5,33 @@
  */
 package GUI;
 
-import static GUI.Ventana.DIMENSION_CASILLA;
-import static GUI.Ventana.RUTA_IMAGEN;
+// imports de este paquete
 import static GUI.Ventana.casillaOrigen;
 import static GUI.Ventana.casillaDestino;
 import static GUI.Ventana.direccionTablero;
 import static GUI.Ventana.girarTableroAuto;
 import static GUI.Ventana.mostrarMovimientos;
+
+// imports de paquete Juego
 import Juego.Casilla;
 import Juego.Tablero;
+import static Juego.ChessRoyale.DIMENSION_CASILLA;
+import static Juego.ChessRoyale.RUTA_IMAGEN;
 
+// imports librerías
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
-import javafx.scene.layout.Border;
+import javax.swing.*;
 import javax.imageio.ImageIO;
 
 /**
  *
- * @author navar
+ * @author Eugenio Navarro
+ * @author Carlos Canovas
  */
 public class PanelCasilla extends JPanel {
 
@@ -71,7 +75,6 @@ public class PanelCasilla extends JPanel {
                             casillaOrigen = null; // resetea las selecciones
                             casillaDestino = null;
                         }
-
                         tableroGUI.dibujarTableroGUI();
                         break;
                     case 3: //Botón derecho del ratón - cancela selección
@@ -142,13 +145,6 @@ public class PanelCasilla extends JPanel {
             for (Casilla punto : casillaOrigen.getPieza().movimientosValidos(tablero, casillaOrigen)) {
                 if (this.fila == punto.getFila() && this.columna == punto.getColumna()) {
                     this.setBorder(BorderFactory.createDashedBorder(borde, 4, 3, 2, true));
-                    /*
-                    try {
-                        BufferedImage icono = ImageIO.read(new File("img/punto.png"));
-                        this.add(new JLabel(new ImageIcon(icono)));                        
-                    } catch (IOException ex) {
-                        System.out.println("Imagen no encontrada: img/punto.png");
-                    }*/
                 }
             }
         }

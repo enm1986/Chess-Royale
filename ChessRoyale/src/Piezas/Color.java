@@ -6,13 +6,15 @@
 package Piezas;
 
 /**
+ * Colores de las piezas y jugadores
  *
- * @author infor04
+ * @author Eugenio Navarro
+ * @author Carlos Canovas
  */
 public enum Color {
     BLANCAS {
         @Override
-        public int getDireccion() {
+        int getDireccion() {
             return -1;
         }
 
@@ -22,7 +24,7 @@ public enum Color {
         }
     }, NEGRAS {
         @Override
-        public int getDireccion() {
+        int getDireccion() {
             return 1;
         }
 
@@ -32,7 +34,25 @@ public enum Color {
         }
     };
 
-    abstract public int getDireccion();
+    /**
+     * Según el color del jugador los peones se moverán en una u otra
+     * dirección<br>
+     * <br>
+     * Se usa como multiplicador en el momento de calcular los movimientos
+     * válidos de los peones.<br>
+     * <br>
+     * Usado exclusivamente por el paquete Piezas
+     *
+     * @return int
+     */
+    abstract int getDireccion();
 
+    /**
+     * Cambia entre los 2 colores posibles<br>
+     * <br>
+     * Usado por la clase Tablero
+     *
+     * @return Color
+     */
     abstract public Color cambiarJugador();
 }

@@ -5,6 +5,8 @@
  */
 package GUI;
 
+
+import static Juego.ChessRoyale.DIMENSION_VENTANA;
 import Juego.Casilla;
 import Juego.Tablero;
 import java.awt.*;
@@ -13,45 +15,50 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
- *
- * @author navar
+ * Interfaz gráfica del programa
+ *  
+ * @author Eugenio Navarro
+ * @author Carlos Canovas
  */
 public class Ventana extends JFrame {
 
-    final static String RUTA_IMAGEN = "img/picasso/";
-    final static Dimension DIMENSION_VENTANA = new Dimension(600, 600);
-    final static Dimension DIMENSION_TABLERO = new Dimension(480, 480);
-    final static Dimension DIMENSION_CASILLA = new Dimension(60, 60);
-    static DireccionTablero direccionTablero;
+    //variables estáticas que se se usan exclusivamente en el paquete GUI
     static boolean girarTableroAuto;
     static boolean mostrarMovimientos;
-
-    private JFrame ventana;
-    private JMenuBar menu;
-    private PanelTablero panelTablero;
-
-    private Tablero tablero;
+    
+    static DireccionTablero direccionTablero;
     static Casilla casillaOrigen;
     static Casilla casillaDestino;
 
+    //Atributos
+    private final JFrame ventana;
+    private final JMenuBar menu;
+    private final PanelTablero panelTablero;
+
+    private final Tablero tablero;
+    
+    //Constructor
     public Ventana() {
+        // forma de la ventana
         this.ventana = new JFrame("Chess Royale");
         this.ventana.setLayout(new BorderLayout());
         this.ventana.setSize(DIMENSION_VENTANA);
-
         this.ventana.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+        // barra de menú
         this.menu = new JMenuBar();
         mostrarMovimientos = false;
         girarTableroAuto = false;
         prepararMenu(this.menu);
         this.ventana.setJMenuBar(this.menu);
 
+        // tablero GUI
         this.tablero = new Tablero();
         this.panelTablero = new PanelTablero(this.tablero);
         direccionTablero = DireccionTablero.NORMAL;
         this.ventana.add(this.panelTablero, BorderLayout.CENTER);
 
+        // posición ventana
         this.ventana.setLocationRelativeTo(null); //centrar ventana
         this.ventana.setVisible(true);
     }

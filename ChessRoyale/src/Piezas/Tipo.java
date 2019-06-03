@@ -6,8 +6,10 @@
 package Piezas;
 
 /**
- *
- * @author infor04
+ *  Tipos de las piezas
+ * 
+ * @author Eugenio Navarro
+ * @author Carlos Canovas
  */
 public enum Tipo {
     PEON {
@@ -72,7 +74,17 @@ public enum Tipo {
         }
     };
 
+    /**
+     * Devuelve si el tipo de pieza es un REY o no
+     * 
+     * @return boolean 
+     */
     abstract public boolean esRey();
 
+    /**
+     * Devuelve si el tipo de pieza es un PEON o no
+     * 
+     * @return boolean 
+     */
     abstract public boolean esPeon();
 }
