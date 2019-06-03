@@ -87,7 +87,7 @@ public class Ventana extends JFrame {
      * <br><br>
      * Por ahora tiene 2 pestañas
      *
-     * @param menu
+     * @param menu Barra de menú
      */
     private void prepararMenu(JMenuBar menu) {
         menu.add(crearPestanaArchivo());
