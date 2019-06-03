@@ -5,39 +5,58 @@
  */
 package GUI;
 
-
+// imports paquete Juego
 import static Juego.ChessRoyale.DIMENSION_VENTANA;
 import Juego.Casilla;
 import Juego.Tablero;
-import java.awt.*;
+
+// imports librerías
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.WindowConstants;
 
 /**
- * Interfaz gráfica del programa
- *  
+ * Interfaz gráfica del programa.
+ * <br><br>
+ *
+ * El bucle principal del juego será gestionado por los eventos que ocurran en
+ * la interfaz gráfica.
+ *
+ *
  * @author Eugenio Navarro
  * @author Carlos Canovas
  */
 public class Ventana extends JFrame {
 
-    //variables estáticas que se se usan exclusivamente en el paquete GUI
+//variables estáticas que se se usan exclusivamente en el paquete GUI
+    // opciones GUI
+    static DireccionTablero direccionTablero;
     static boolean girarTableroAuto;
     static boolean mostrarMovimientos;
-    
-    static DireccionTablero direccionTablero;
+
+    // casillas seleccionables en el tablero (Lógica juego)
     static Casilla casillaOrigen;
     static Casilla casillaDestino;
 
-    //Atributos
+//Atributos
+    //Atributos GUI
     private final JFrame ventana;
     private final JMenuBar menu;
     private final PanelTablero panelTablero;
 
+    //Atributos Lógica juego
     private final Tablero tablero;
-    
+
     //Constructor
+    /**
+     * Constructor de la ventana de la interfaz gráfica
+     */
     public Ventana() {
         // forma de la ventana
         this.ventana = new JFrame("Chess Royale");
@@ -63,14 +82,27 @@ public class Ventana extends JFrame {
         this.ventana.setVisible(true);
     }
 
+    /**
+     * Crea la barra de menú
+     * <br><br>
+     * Por ahora tiene 2 pestañas
+     *
+     * @param menu
+     */
     private void prepararMenu(JMenuBar menu) {
         menu.add(crearPestanaArchivo());
         menu.add(crearPestanaOpciones());
     }
 
+    /**
+     * Crea la pestaña "Archivo" de la barrá de menú.
+     *
+     * @return JMenu - Pestaña de la barra del menú
+     */
     private JMenu crearPestanaArchivo() {
         JMenu archivo = new JMenu("Archivo");
 
+        //Primera opción de la pestaña
         JMenuItem reiniciar = new JMenuItem("Reiniciar partida");
         reiniciar.addActionListener(new ActionListener() {
             @Override
@@ -81,15 +113,17 @@ public class Ventana extends JFrame {
         });
         archivo.add(reiniciar);
 
+        //Segunda opción de la pestaña
         JMenuItem guardarPartida = new JMenuItem("Guardar partida...");
         guardarPartida.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Guardar partida");
+                System.out.println("Guardar partida - No implementado");
             }
         });
         archivo.add(guardarPartida);
 
+        //Tercera opción de la pestaña
         JMenuItem salir = new JMenuItem("Salir");
         salir.addActionListener(new ActionListener() {
             @Override
@@ -102,9 +136,15 @@ public class Ventana extends JFrame {
         return archivo;
     }
 
+    /**
+     * Crea la pestaña "Opciones" de la barrá de menú.
+     *
+     * @return JMenu - Pestaña de la barra del menú
+     */
     private JMenu crearPestanaOpciones() {
         JMenu opciones = new JMenu("Opciones");
 
+        //Primera opción de la pestaña
         JMenuItem girar = new JMenuItem("Girar tablero");
         girar.addActionListener(new ActionListener() {
             @Override
@@ -115,8 +155,10 @@ public class Ventana extends JFrame {
         });
         opciones.add(girar);
 
+        //Separador
         opciones.addSeparator();
 
+        //Segunda opción de la pestaña - Activar/desactivar giro automático
         JCheckBoxMenuItem giroAuto = new JCheckBoxMenuItem("Giro automático");
         giroAuto.addActionListener(new ActionListener() {
             @Override
@@ -126,6 +168,7 @@ public class Ventana extends JFrame {
         });
         opciones.add(giroAuto);
 
+        //Tercera opción de la pestaña - - Activar/desactivar ver movimientos
         JCheckBoxMenuItem verMov = new JCheckBoxMenuItem("Ver movimientos");
         verMov.addActionListener(new ActionListener() {
             @Override

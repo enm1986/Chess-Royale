@@ -10,7 +10,12 @@ import java.awt.Dimension;
 
 /**
  * Juego de ajedrez con alguna modificación en las reglas.
- *
+ * <br><br>
+ * Controles GUI:
+ * <ul>
+ * <li>Botón izquierdo ratón: selecciona pieza</li>
+ * <li>Botón derecho ratón: cancela selección</li>
+ * </ul>
  *
  * @author Eugenio Navarro
  * @author Carlos Canovas
