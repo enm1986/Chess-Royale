@@ -15,9 +15,19 @@ public enum Tipo {
         public boolean esRey() {
             return false;
         }
+
+        @Override
+        public boolean esPeon() {
+            return true;
+        }
     }, ALFIL {
         @Override
         public boolean esRey() {
+            return false;
+        }
+
+        @Override
+        public boolean esPeon() {
             return false;
         }
     }, TORRE {
@@ -25,9 +35,19 @@ public enum Tipo {
         public boolean esRey() {
             return false;
         }
+
+        @Override
+        public boolean esPeon() {
+            return false;
+        }
     }, CABALLO {
         @Override
         public boolean esRey() {
+            return false;
+        }
+
+        @Override
+        public boolean esPeon() {
             return false;
         }
     }, DAMA {
@@ -35,12 +55,24 @@ public enum Tipo {
         public boolean esRey() {
             return false;
         }
+
+        @Override
+        public boolean esPeon() {
+            return false;
+        }
     }, REY {
         @Override
         public boolean esRey() {
             return true;
         }
+
+        @Override
+        public boolean esPeon() {
+            return false;
+        }
     };
 
     abstract public boolean esRey();
+
+    abstract public boolean esPeon();
 }

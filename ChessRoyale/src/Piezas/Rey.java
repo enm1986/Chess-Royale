@@ -36,7 +36,6 @@ public class Rey extends Pieza {
     
     @Override
     public ArrayList<Casilla> movimientosValidos(Tablero tablero, Casilla origen) {
-        //ArrayList<Movimiento> lista = new ArrayList<>();
         ArrayList<Casilla> lista = new ArrayList<>();
         int[] coordenadaDestino = {0, 0};
         for (int[] coordenadaOffset : COORDENADAS_OFFSET) {
@@ -45,11 +44,9 @@ public class Rey extends Pieza {
             if (coordenadaValida(coordenadaDestino)) {
                 Casilla destino = tablero.getCasilla(coordenadaDestino[0], coordenadaDestino[1]);
                 if (!destino.isOcupada()) {//Movimiento
-                    //lista.add(new MovimientoSimple(tablero, origen, destino));
                     lista.add(destino);
                 } else {
                     if (this.getColor() != destino.getPieza().getColor()) {//Ataque si es de otro color
-                        //lista.add(new MovimientoAtaque(tablero, origen, destino));
                         lista.add(destino);
                     }
                 }

@@ -125,7 +125,7 @@ public class Tablero {
     }
 
     public void ejecutarJugada(Casilla casillaOrigen, Casilla casillaDestino) {
-        ArrayList<Casilla> lista = casillaOrigen.getPieza().movimientosValidos(this, casillaOrigen);
+        ArrayList<Casilla> lista = new ArrayList<>(casillaOrigen.getPieza().movimientosValidos(this, casillaOrigen));
         boolean movimientoValido = false;
         int i = 0;
         while (!movimientoValido && i < lista.size()) {
@@ -144,6 +144,8 @@ public class Tablero {
                         if (((Rey)casillaDestino.getPieza()).getContadorMovimientos()>10){
                             this.setFin();
                         }
+                    } else if(casillaDestino.getPieza().getTipo().esPeon()){
+                        ((Peon)casillaDestino.getPieza()).setPrimer_movimiento();
                     }
                     this.cambiarJugadorActivo();
                 }

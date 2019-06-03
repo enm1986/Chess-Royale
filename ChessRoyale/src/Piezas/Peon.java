@@ -34,7 +34,6 @@ public class Peon extends Pieza {
 
     @Override
     public ArrayList<Casilla> movimientosValidos(Tablero tablero, Casilla origen) {
-        //ArrayList<Movimiento> lista = new ArrayList<>();
         ArrayList<Casilla> lista = new ArrayList<>();
         int[] coordenadaDestino = {0, 0};
         for (int[] coordenadaOffset : COORDENADAS_OFFSET) {
@@ -46,15 +45,12 @@ public class Peon extends Pieza {
                     if (coordenadaOffset[0] == 2 && this.isPrimer_movimiento()) {//movimiento de 2 casillas
                         Casilla anterior = tablero.getCasilla(origen.getFila() + this.getColor().getDireccion(), origen.getColumna());
                         if (!anterior.isOcupada()) {
-                            //lista.add(new MovimientoSimple(tablero, origen, destino));
                             lista.add(destino);
                         }
-                    } else {//movimiento de 1 casilla
-                        //lista.add(new MovimientoSimple(tablero, origen, destino));
+                    } else if (coordenadaOffset[0] == 1){//movimiento de 1 casilla
                         lista.add(destino);
                     }
                 } else if (coordenadaOffset[1] != 0 && destino.isOcupada() && this.getColor() != destino.getPieza().getColor()) {//Ataque
-                    //lista.add(new MovimientoAtaque(tablero, origen, destino));
                     lista.add(destino);
                 }
             }
