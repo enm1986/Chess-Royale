@@ -219,6 +219,9 @@ public class Tablero {
      * Muestra el tablero por pantalla.
      * <br><br>
      * Usado para hacer pruebas
+     * 
+     * @deprecated Se usa una interficie gráfica para ver el tablero
+     * @see GUI.Ventana
      */
     public void mostrarTablero() {
         System.out.println("  ___ ___ ___ ___ ___ ___ ___ ___ ");

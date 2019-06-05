@@ -100,6 +100,9 @@ public class Casilla {
      * Muestra información de la casilla por pantalla.
      * <br><br>
      * Usado para hacer pruebas
+     * 
+     * @deprecated Usamos interfaz gráfica
+     * @see GUI.Ventana
      */
     public void mostrarCasilla() {
         System.out.println("coordenadas: " + this.getFila() + "," + this.getColumna());
